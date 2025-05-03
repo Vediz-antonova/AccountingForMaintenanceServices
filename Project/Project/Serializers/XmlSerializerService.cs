@@ -1,5 +1,5 @@
 ﻿using System.Xml.Serialization;
-namespace AccountingForMaintenanceServicesProject.Serializers;
+namespace Project.Serializers;
 
 public class XmlSerializerService : ISerializer
 {

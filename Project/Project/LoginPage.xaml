@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project.LoginPage"
+             Title="Вход">
+    
+    <StackLayout Padding="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="15">
+        <Entry 
+            Placeholder="Email" 
+            x:Name="EmailEntry"
+            Keyboard="Email" />
+        <Entry 
+            Placeholder="Пароль" 
+            x:Name="PasswordEntry"
+            IsPassword="True" />
+        <Button 
+            Text="Войти" 
+            BackgroundColor="LightBlue" 
+            WidthRequest="200" 
+            HeightRequest="60"
+            Clicked="OnLoginClicked"/>
+    </StackLayout>
+</ContentPage>

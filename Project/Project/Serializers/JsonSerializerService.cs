@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-namespace AccountingForMaintenanceServicesProject.Serializers;
+namespace Project.Serializers;
 
 public class JsonSerializerService : ISerializer
 {

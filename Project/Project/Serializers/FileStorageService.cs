@@ -1,4 +1,4 @@
-﻿namespace AccountingForMaintenanceServicesProject.Serializers;
+﻿namespace Project.Serializers;
 
 public class FileStorageService
 {

@@ -5,10 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Project"
     Shell.FlyoutBehavior="Disabled"
-    Title="Project">
+    Title="AccountingForMaintenanceServices">
 
     <ShellContent
-        Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 

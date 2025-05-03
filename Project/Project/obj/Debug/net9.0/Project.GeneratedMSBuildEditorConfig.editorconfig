@@ -26,11 +26,23 @@ build_metadata.AdditionalFiles.ManifestResourceName = Project.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[C:/AccountingForMaintenanceServices/Project/Project/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Project.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = LoginPage.xaml
+
 [C:/AccountingForMaintenanceServices/Project/Project/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Project.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/AccountingForMaintenanceServices/Project/Project/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Project.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = RegisterPage.xaml
 
 [C:/AccountingForMaintenanceServices/Project/Project/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

@@ -1,0 +1,17 @@
+C:\AccountingForMaintenanceServices\Project\Project\bin\Debug\net9.0\Project.deps.json
+C:\AccountingForMaintenanceServices\Project\Project\bin\Debug\net9.0\Project.dll
+C:\AccountingForMaintenanceServices\Project\Project\bin\Debug\net9.0\Project.pdb
+C:\AccountingForMaintenanceServices\Project\Project\bin\Debug\net9.0\AccountingForMaintenanceServicesLogic.dll
+C:\AccountingForMaintenanceServices\Project\Project\bin\Debug\net9.0\AccountingForMaintenanceServicesLogic.pdb
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.csproj.AssemblyReference.cache
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.AssemblyInfoInputs.cache
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.AssemblyInfo.cs
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.csproj.CoreCompileInputs.cache
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.sourcelink.json
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\XamlC.stamp
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.csproj.Up2Date
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.dll
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\refint\Project.dll
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\Project.pdb
+C:\AccountingForMaintenanceServices\Project\Project\obj\Debug\net9.0\ref\Project.dll

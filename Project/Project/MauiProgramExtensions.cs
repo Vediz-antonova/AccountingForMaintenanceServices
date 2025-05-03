@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-
 namespace Project;
 
 public static class MauiProgramExtensions
@@ -13,7 +12,7 @@ public static class MauiProgramExtensions
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-
+		
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
