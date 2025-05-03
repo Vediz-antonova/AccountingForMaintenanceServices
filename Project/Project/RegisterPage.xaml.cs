@@ -13,7 +13,7 @@ public partial class RegisterPage : ContentPage
         InitializeComponent();
     }
 
-    private void OnRegisterClicked(object sender, EventArgs e)
+    private async void OnRegisterClicked(object sender, EventArgs e)
     {
         try
         {
@@ -47,6 +47,7 @@ public partial class RegisterPage : ContentPage
             users.Add(newUser);
             SaveUsers(users);
             DisplayAlert("Успех", "Регистрация прошла успешно!", "OK");
+            await Navigation.PopAsync();
         }
         catch (Exception ex)
         {
@@ -64,6 +65,7 @@ public partial class RegisterPage : ContentPage
     {
         if (File.Exists(UserFilePath))
         {
+            // File.Delete(UserFilePath);
             if (!File.Exists(UserFilePath))
             {
                 File.Create(UserFilePath).Dispose();

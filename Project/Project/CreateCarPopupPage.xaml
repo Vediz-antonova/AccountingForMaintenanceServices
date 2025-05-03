@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project.CreateCarPopupPage">
+    
+    <Frame VerticalOptions="Center" HorizontalOptions="Center"
+           Padding="20" CornerRadius="10" HasShadow="True">
+        <StackLayout Spacing="15">
+            <Label Text="Создание автомобиля" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Entry x:Name="BrandEntry" Placeholder="Бренд авто" />
+            <Entry x:Name="ModelEntry" Placeholder="Модель авто" />
+            <Entry x:Name="YearEntry" Placeholder="Год изготовления" Keyboard="Numeric" />
+            <Entry x:Name="MileageEntry" Placeholder="Пробег" Keyboard="Numeric" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Spacing="10">
+                <Button Text="Отмена" Clicked="OnCancelClicked"/>
+                <Button Text="Создать" Clicked="OnCreateClicked"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</ContentPage>

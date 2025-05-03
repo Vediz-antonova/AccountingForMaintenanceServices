@@ -12,15 +12,17 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
     }
 
-    private void OnLoginClicked(object sender, EventArgs e)
+    private async void OnLoginClicked(object sender, EventArgs e)
     {
         try
         {
             var users = LoadUsers();
-            var user = users.FirstOrDefault(u => u.Email == EmailEntry.Text && u.Password == PasswordEntry.Text);
+            // var user = users.FirstOrDefault(u => u.Email == EmailEntry.Text && u.Password == PasswordEntry.Text);
+            var user = users.FirstOrDefault();
             if (user != null)
             {
                 DisplayAlert("Успех", "Вход выполнен успешно!", "OK");
+                await Navigation.PushAsync(new MaintenancePage(user.Id));
             }
             else
             {
