@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1387px" preserveAspectRatio="none" style="width:1709px;height:1387px;background:#FFFFFF;" version="1.1" viewBox="0 0 1709 1387" width="1709px" zoomAndPan="magnify"><defs/><g><!--MD5=[3fd616f346a44cd59a91eb10b19e157c]
+class User--><g id="elem_User"><rect codeLine="2" fill="#F1F1F1" height="113.1875" id="User" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="175" x="659" y="278.5"/><ellipse cx="726.25" cy="294.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M729.2188,300.1406 Q728.6406,300.4375 728,300.5781 Q727.3594,300.7344 726.6563,300.7344 Q724.1563,300.7344 722.8281,299.0938 Q721.5156,297.4375 721.5156,294.3125 Q721.5156,291.1875 722.8281,289.5313 Q724.1563,287.875 726.6563,287.875 Q727.3594,287.875 728,288.0313 Q728.6563,288.1875 729.2188,288.4844 L729.2188,291.2031 Q728.5938,290.625 728,290.3594 Q727.4063,290.0781 726.7813,290.0781 Q725.4375,290.0781 724.75,291.1563 Q724.0625,292.2188 724.0625,294.3125 Q724.0625,296.4063 724.75,297.4844 Q725.4375,298.5469 726.7813,298.5469 Q727.4063,298.5469 728,298.2813 Q728.5938,298 729.2188,297.4219 L729.2188,300.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="746.75" y="299.3467">User</text><line style="stroke:#181818;stroke-width:0.5;" x1="660" x2="833" y1="310.5" y2="310.5"/><ellipse cx="670" cy="324.1484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="679" y="327.4951">Id : int</text><ellipse cx="670" cy="340.4453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="679" y="343.792">Email : string</text><ellipse cx="670" cy="356.7422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="679" y="360.0889">Password : string</text><ellipse cx="670" cy="373.0391" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="679" y="376.3857">CreatedAt : DateTime</text><line style="stroke:#181818;stroke-width:0.5;" x1="660" x2="833" y1="383.6875" y2="383.6875"/></g><!--MD5=[3f0ef310aaa84a542276992c5216544d]
+class Car--><g id="elem_Car"><rect codeLine="9" fill="#F1F1F1" height="162.0781" id="Car" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="175" x="454" y="724"/><ellipse cx="525.75" cy="740" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M528.7188,745.6406 Q528.1406,745.9375 527.5,746.0781 Q526.8594,746.2344 526.1563,746.2344 Q523.6563,746.2344 522.3281,744.5938 Q521.0156,742.9375 521.0156,739.8125 Q521.0156,736.6875 522.3281,735.0313 Q523.6563,733.375 526.1563,733.375 Q526.8594,733.375 527.5,733.5313 Q528.1563,733.6875 528.7188,733.9844 L528.7188,736.7031 Q528.0938,736.125 527.5,735.8594 Q526.9063,735.5781 526.2813,735.5781 Q524.9375,735.5781 524.25,736.6563 Q523.5625,737.7188 523.5625,739.8125 Q523.5625,741.9063 524.25,742.9844 Q524.9375,744.0469 526.2813,744.0469 Q526.9063,744.0469 527.5,743.7813 Q528.0938,743.5 528.7188,742.9219 L528.7188,745.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="23" x="546.25" y="744.8467">Car</text><line style="stroke:#181818;stroke-width:0.5;" x1="455" x2="628" y1="756" y2="756"/><ellipse cx="465" cy="769.6484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="474" y="772.9951">Id : int</text><ellipse cx="465" cy="785.9453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="474" y="789.292">UserId : int</text><ellipse cx="465" cy="802.2422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="474" y="805.5889">Brand : string</text><ellipse cx="465" cy="818.5391" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="474" y="821.8857">Model : string</text><ellipse cx="465" cy="834.8359" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="61" x="474" y="838.1826">Year : int</text><ellipse cx="465" cy="851.1328" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="474" y="854.4795">Mileage : int</text><ellipse cx="465" cy="867.4297" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="474" y="870.7764">CreatedAt : DateTime</text><line style="stroke:#181818;stroke-width:0.5;" x1="455" x2="628" y1="878.0781" y2="878.0781"/></g><!--MD5=[0b72f93f1e261292994a4d0c795fdf98]
+class Maintenance--><g id="elem_Maintenance"><rect codeLine="19" fill="#F1F1F1" height="194.6719" id="Maintenance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="175" x="7" y="1186"/><ellipse cx="46.3" cy="1202" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M49.2688,1207.6406 Q48.6906,1207.9375 48.05,1208.0781 Q47.4094,1208.2344 46.7063,1208.2344 Q44.2063,1208.2344 42.8781,1206.5938 Q41.5656,1204.9375 41.5656,1201.8125 Q41.5656,1198.6875 42.8781,1197.0313 Q44.2063,1195.375 46.7063,1195.375 Q47.4094,1195.375 48.05,1195.5313 Q48.7063,1195.6875 49.2688,1195.9844 L49.2688,1198.7031 Q48.6438,1198.125 48.05,1197.8594 Q47.4563,1197.5781 46.8313,1197.5781 Q45.4875,1197.5781 44.8,1198.6563 Q44.1125,1199.7188 44.1125,1201.8125 Q44.1125,1203.9063 44.8,1204.9844 Q45.4875,1206.0469 46.8313,1206.0469 Q47.4563,1206.0469 48.05,1205.7813 Q48.6438,1205.5 49.2688,1204.9219 L49.2688,1207.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="65.7" y="1206.8467">Maintenance</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="181" y1="1218" y2="1218"/><ellipse cx="18" cy="1231.6484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="27" y="1234.9951">Id : int</text><ellipse cx="18" cy="1247.9453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="27" y="1251.292">CarId : int</text><ellipse cx="18" cy="1264.2422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="27" y="1267.5889">Date : DateTime</text><ellipse cx="18" cy="1280.5391" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="27" y="1283.8857">Mileage : int</text><ellipse cx="18" cy="1296.8359" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="27" y="1300.1826">Category : string</text><ellipse cx="18" cy="1313.1328" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="27" y="1316.4795">PartNumber : string</text><ellipse cx="18" cy="1329.4297" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="27" y="1332.7764">Cost : decimal</text><ellipse cx="18" cy="1345.7266" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="27" y="1349.0732">Note : string</text><ellipse cx="18" cy="1362.0234" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="27" y="1365.3701">CreatedAt : DateTime</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="181" y1="1372.6719" y2="1372.6719"/></g><!--MD5=[50f39069cd7d30b8ca10557b7ad7ab8f]
+class Reminder--><g id="elem_Reminder"><rect codeLine="31" fill="#F1F1F1" height="162.0781" id="Reminder" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="175" x="883" y="1202.5"/><ellipse cx="932.75" cy="1218.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M935.7188,1224.1406 Q935.1406,1224.4375 934.5,1224.5781 Q933.8594,1224.7344 933.1563,1224.7344 Q930.6563,1224.7344 929.3281,1223.0938 Q928.0156,1221.4375 928.0156,1218.3125 Q928.0156,1215.1875 929.3281,1213.5313 Q930.6563,1211.875 933.1563,1211.875 Q933.8594,1211.875 934.5,1212.0313 Q935.1563,1212.1875 935.7188,1212.4844 L935.7188,1215.2031 Q935.0938,1214.625 934.5,1214.3594 Q933.9063,1214.0781 933.2813,1214.0781 Q931.9375,1214.0781 931.25,1215.1563 Q930.5625,1216.2188 930.5625,1218.3125 Q930.5625,1220.4063 931.25,1221.4844 Q931.9375,1222.5469 933.2813,1222.5469 Q933.9063,1222.5469 934.5,1222.2813 Q935.0938,1222 935.7188,1221.4219 L935.7188,1224.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="953.25" y="1223.3467">Reminder</text><line style="stroke:#181818;stroke-width:0.5;" x1="884" x2="1057" y1="1234.5" y2="1234.5"/><ellipse cx="894" cy="1248.1484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="903" y="1251.4951">Id : int</text><ellipse cx="894" cy="1264.4453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="903" y="1267.792">UserId : int</text><ellipse cx="894" cy="1280.7422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="903" y="1284.0889">CarId : int</text><ellipse cx="894" cy="1297.0391" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="903" y="1300.3857">Type : string</text><ellipse cx="894" cy="1313.3359" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="903" y="1316.6826">DueDate : DateTime</text><ellipse cx="894" cy="1329.6328" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="125" x="903" y="1332.9795">Frequency : string</text><ellipse cx="894" cy="1345.9297" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="903" y="1349.2764">CreatedAt : DateTime</text><line style="stroke:#181818;stroke-width:0.5;" x1="884" x2="1057" y1="1356.5781" y2="1356.5781"/></g><!--MD5=[847dd3bcae8f51064cf7debec0e3aeb7]
+class ServiceStation--><g id="elem_ServiceStation"><rect codeLine="41" fill="#F1F1F1" height="178.375" id="ServiceStation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="175" x="1113" y="246"/><ellipse cx="1148.25" cy="262" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1151.2188,267.6406 Q1150.6406,267.9375 1150,268.0781 Q1149.3594,268.2344 1148.6563,268.2344 Q1146.1563,268.2344 1144.8281,266.5938 Q1143.5156,264.9375 1143.5156,261.8125 Q1143.5156,258.6875 1144.8281,257.0313 Q1146.1563,255.375 1148.6563,255.375 Q1149.3594,255.375 1150,255.5313 Q1150.6563,255.6875 1151.2188,255.9844 L1151.2188,258.7031 Q1150.5938,258.125 1150,257.8594 Q1149.4063,257.5781 1148.7813,257.5781 Q1147.4375,257.5781 1146.75,258.6563 Q1146.0625,259.7188 1146.0625,261.8125 Q1146.0625,263.9063 1146.75,264.9844 Q1147.4375,266.0469 1148.7813,266.0469 Q1149.4063,266.0469 1150,265.7813 Q1150.5938,265.5 1151.2188,264.9219 L1151.2188,267.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="1166.75" y="266.8467">ServiceStation</text><line style="stroke:#181818;stroke-width:0.5;" x1="1114" x2="1287" y1="278" y2="278"/><ellipse cx="1124" cy="291.6484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="1133" y="294.9951">Id : int</text><ellipse cx="1124" cy="307.9453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="1133" y="311.292">Name : string</text><ellipse cx="1124" cy="324.2422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="1133" y="327.5889">Address : string</text><ellipse cx="1124" cy="340.5391" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="1133" y="343.8857">Latitude : decimal</text><ellipse cx="1124" cy="356.8359" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="1133" y="360.1826">Longitude : decimal</text><ellipse cx="1124" cy="373.1328" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="1133" y="376.4795">Rating : decimal</text><ellipse cx="1124" cy="389.4297" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="1133" y="392.7764">ContactInfo : string</text><ellipse cx="1124" cy="405.7266" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="1133" y="409.0732">CreatedAt : DateTime</text><line style="stroke:#181818;stroke-width:0.5;" x1="1114" x2="1287" y1="416.375" y2="416.375"/></g><!--MD5=[f422a882130148b3e6b64e0cf3254178]
+class IUserService--><g id="elem_IUserService"><rect codeLine="53" fill="#F1F1F1" height="162.0781" id="IUserService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="208" x="869.5" y="254"/><ellipse cx="926.75" cy="270" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M922.6719,265.7656 L922.6719,263.6094 L930.0625,263.6094 L930.0625,265.7656 L927.5938,265.7656 L927.5938,273.8438 L930.0625,273.8438 L930.0625,276 L922.6719,276 L922.6719,273.8438 L925.1406,273.8438 L925.1406,265.7656 L922.6719,265.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="85" x="947.25" y="274.8467">IUserService</text><line style="stroke:#181818;stroke-width:0.5;" x1="870.5" x2="1076.5" y1="286" y2="286"/><line style="stroke:#181818;stroke-width:0.5;" x1="870.5" x2="1076.5" y1="294" y2="294"/><ellipse cx="880.5" cy="307.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="889.5" y="310.9951">Register() : User</text><ellipse cx="880.5" cy="323.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="889.5" y="327.292">Login() : User</text><ellipse cx="880.5" cy="340.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="889.5" y="343.5889">AddUser() : void</text><ellipse cx="880.5" cy="356.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="889.5" y="359.8857">GetUserByEmail() : User</text><ellipse cx="880.5" cy="372.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="889.5" y="376.1826">DeleteUser() : void</text><ellipse cx="880.5" cy="389.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="889.5" y="392.4795">GetAllUsers() : List&lt;User&gt;</text><ellipse cx="880.5" cy="405.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="889.5" y="408.7764">UpdateUser() : void</text></g><!--MD5=[e4ac4745f81aec2db60ad4ddae80b659]
+class UserService--><g id="elem_UserService"><rect codeLine="62" fill="#F1F1F1" height="162.0781" id="UserService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="208" x="799.5" y="7"/><ellipse cx="858.25" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M861.2188,28.6406 Q860.6406,28.9375 860,29.0781 Q859.3594,29.2344 858.6563,29.2344 Q856.1563,29.2344 854.8281,27.5938 Q853.5156,25.9375 853.5156,22.8125 Q853.5156,19.6875 854.8281,18.0313 Q856.1563,16.375 858.6563,16.375 Q859.3594,16.375 860,16.5313 Q860.6563,16.6875 861.2188,16.9844 L861.2188,19.7031 Q860.5938,19.125 860,18.8594 Q859.4063,18.5781 858.7813,18.5781 Q857.4375,18.5781 856.75,19.6563 Q856.0625,20.7188 856.0625,22.8125 Q856.0625,24.9063 856.75,25.9844 Q857.4375,27.0469 858.7813,27.0469 Q859.4063,27.0469 860,26.7813 Q860.5938,26.5 861.2188,25.9219 L861.2188,28.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="878.75" y="27.8467">UserService</text><line style="stroke:#181818;stroke-width:0.5;" x1="800.5" x2="1006.5" y1="39" y2="39"/><line style="stroke:#181818;stroke-width:0.5;" x1="800.5" x2="1006.5" y1="47" y2="47"/><ellipse cx="810.5" cy="60.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="819.5" y="63.9951">Register() : User</text><ellipse cx="810.5" cy="76.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="819.5" y="80.292">Login() : User</text><ellipse cx="810.5" cy="93.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="819.5" y="96.5889">AddUser() : void</text><ellipse cx="810.5" cy="109.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="819.5" y="112.8857">GetUserByEmail() : User</text><ellipse cx="810.5" cy="125.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="819.5" y="129.1826">DeleteUser() : void</text><ellipse cx="810.5" cy="142.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="819.5" y="145.4795">GetAllUsers() : List&lt;User&gt;</text><ellipse cx="810.5" cy="158.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="819.5" y="161.7764">UpdateUser() : void</text></g><!--MD5=[201dd6ae92d0eafc71453d7b9cf685f5]
+class ICarService--><g id="elem_ICarService"><rect codeLine="73" fill="#F1F1F1" height="162.0781" id="ICarService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="236" x="664.5" y="724"/><ellipse cx="740.25" cy="740" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M736.1719,735.7656 L736.1719,733.6094 L743.5625,733.6094 L743.5625,735.7656 L741.0938,735.7656 L741.0938,743.8438 L743.5625,743.8438 L743.5625,746 L736.1719,746 L736.1719,743.8438 L738.6406,743.8438 L738.6406,735.7656 L736.1719,735.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="76" x="760.75" y="744.8467">ICarService</text><line style="stroke:#181818;stroke-width:0.5;" x1="665.5" x2="899.5" y1="756" y2="756"/><line style="stroke:#181818;stroke-width:0.5;" x1="665.5" x2="899.5" y1="764" y2="764"/><ellipse cx="675.5" cy="777.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="684.5" y="780.9951">AddCar() : Car</text><ellipse cx="675.5" cy="793.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="684.5" y="797.292">UpdateCar() : void</text><ellipse cx="675.5" cy="810.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="684.5" y="813.5889">DeleteCar() : void</text><ellipse cx="675.5" cy="826.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="684.5" y="829.8857">GetCarById() : Car</text><ellipse cx="675.5" cy="842.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="210" x="684.5" y="846.1826">GetCarsByUserId() : List&lt;Car&gt;</text><ellipse cx="675.5" cy="859.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="684.5" y="862.4795">GetAllCars() : List&lt;Car&gt;</text><ellipse cx="675.5" cy="875.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="154" x="684.5" y="878.7764">UpdateMileage() : void</text></g><!--MD5=[17d20a1595e6d2fd84342931c17ea8a2]
+class CarService--><g id="elem_CarService"><rect codeLine="82" fill="#F1F1F1" height="162.0781" id="CarService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="236" x="644.5" y="485"/><ellipse cx="721.75" cy="501" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M724.7188,506.6406 Q724.1406,506.9375 723.5,507.0781 Q722.8594,507.2344 722.1563,507.2344 Q719.6563,507.2344 718.3281,505.5938 Q717.0156,503.9375 717.0156,500.8125 Q717.0156,497.6875 718.3281,496.0313 Q719.6563,494.375 722.1563,494.375 Q722.8594,494.375 723.5,494.5313 Q724.1563,494.6875 724.7188,494.9844 L724.7188,497.7031 Q724.0938,497.125 723.5,496.8594 Q722.9063,496.5781 722.2813,496.5781 Q720.9375,496.5781 720.25,497.6563 Q719.5625,498.7188 719.5625,500.8125 Q719.5625,502.9063 720.25,503.9844 Q720.9375,505.0469 722.2813,505.0469 Q722.9063,505.0469 723.5,504.7813 Q724.0938,504.5 724.7188,503.9219 L724.7188,506.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="742.25" y="505.8467">CarService</text><line style="stroke:#181818;stroke-width:0.5;" x1="645.5" x2="879.5" y1="517" y2="517"/><line style="stroke:#181818;stroke-width:0.5;" x1="645.5" x2="879.5" y1="525" y2="525"/><ellipse cx="655.5" cy="538.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="664.5" y="541.9951">AddCar() : Car</text><ellipse cx="655.5" cy="554.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="664.5" y="558.292">UpdateCar() : void</text><ellipse cx="655.5" cy="571.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="664.5" y="574.5889">DeleteCar() : void</text><ellipse cx="655.5" cy="587.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="664.5" y="590.8857">GetCarById() : Car</text><ellipse cx="655.5" cy="603.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="210" x="664.5" y="607.1826">GetCarsByUserId() : List&lt;Car&gt;</text><ellipse cx="655.5" cy="620.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="664.5" y="623.4795">GetAllCars() : List&lt;Car&gt;</text><ellipse cx="655.5" cy="636.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="154" x="664.5" y="639.7764">UpdateMileage() : void</text></g><!--MD5=[a496a573606e417ba4a16aa4eaa4cb75]
+class IMaintenanceService--><g id="elem_IMaintenanceService"><rect codeLine="93" fill="#F1F1F1" height="145.7813" id="IMaintenanceService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="359" x="489" y="1210.5"/><ellipse cx="593.25" cy="1226.5" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M589.1719,1222.2656 L589.1719,1220.1094 L596.5625,1220.1094 L596.5625,1222.2656 L594.0938,1222.2656 L594.0938,1230.3438 L596.5625,1230.3438 L596.5625,1232.5 L589.1719,1232.5 L589.1719,1230.3438 L591.6406,1230.3438 L591.6406,1222.2656 L589.1719,1222.2656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="142" x="613.75" y="1231.3467">IMaintenanceService</text><line style="stroke:#181818;stroke-width:0.5;" x1="490" x2="847" y1="1242.5" y2="1242.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="490" x2="847" y1="1250.5" y2="1250.5"/><ellipse cx="500" cy="1264.1484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="228" x="509" y="1267.4951">AddMaintenance() : Maintenance</text><ellipse cx="500" cy="1280.4453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="509" y="1283.792">UpdateMaintenance() : void</text><ellipse cx="500" cy="1296.7422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="509" y="1300.0889">DeleteMaintenance() : void</text><ellipse cx="500" cy="1313.0391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="255" x="509" y="1316.3857">GetMaintenanceById() : Maintenance</text><ellipse cx="500" cy="1329.3359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="333" x="509" y="1332.6826">GetMaintenancesByCarId() : List&lt;Maintenance&gt;</text><ellipse cx="500" cy="1345.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="296" x="509" y="1348.9795">GetAllMaintenances() : List&lt;Maintenance&gt;</text></g><!--MD5=[e5d01ac55336d28fd58bfac38bd4c63d]
+class MaintenanceService--><g id="elem_MaintenanceService"><rect codeLine="101" fill="#F1F1F1" height="162.0781" id="MaintenanceService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="493" x="198" y="947"/><ellipse cx="370.75" cy="963" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M373.7188,968.6406 Q373.1406,968.9375 372.5,969.0781 Q371.8594,969.2344 371.1563,969.2344 Q368.6563,969.2344 367.3281,967.5938 Q366.0156,965.9375 366.0156,962.8125 Q366.0156,959.6875 367.3281,958.0313 Q368.6563,956.375 371.1563,956.375 Q371.8594,956.375 372.5,956.5313 Q373.1563,956.6875 373.7188,956.9844 L373.7188,959.7031 Q373.0938,959.125 372.5,958.8594 Q371.9063,958.5781 371.2813,958.5781 Q369.9375,958.5781 369.25,959.6563 Q368.5625,960.7188 368.5625,962.8125 Q368.5625,964.9063 369.25,965.9844 Q369.9375,967.0469 371.2813,967.0469 Q371.9063,967.0469 372.5,966.7813 Q373.0938,966.5 373.7188,965.9219 L373.7188,968.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139" x="391.25" y="967.8467">MaintenanceService</text><line style="stroke:#181818;stroke-width:0.5;" x1="199" x2="690" y1="979" y2="979"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="206" y="989.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="467" x="218" y="995.9951">MaintenanceAdded : EventHandler&lt;MaintenanceAddedEventArgs&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="199" x2="690" y1="1003.2969" y2="1003.2969"/><ellipse cx="209" cy="1016.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="228" x="218" y="1020.292">AddMaintenance() : Maintenance</text><ellipse cx="209" cy="1033.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="218" y="1036.5889">UpdateMaintenance() : void</text><ellipse cx="209" cy="1049.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="218" y="1052.8857">DeleteMaintenance() : void</text><ellipse cx="209" cy="1065.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="255" x="218" y="1069.1826">GetMaintenanceById() : Maintenance</text><ellipse cx="209" cy="1082.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="333" x="218" y="1085.4795">GetMaintenancesByCarId() : List&lt;Maintenance&gt;</text><ellipse cx="209" cy="1098.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="296" x="218" y="1101.7764">GetAllMaintenances() : List&lt;Maintenance&gt;</text></g><!--MD5=[49b0e58b0097d8efbdda06d06b5afdb8]
+class IReminderService--><g id="elem_IReminderService"><rect codeLine="112" fill="#F1F1F1" height="162.0781" id="IReminderService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="324" x="1093.5" y="1202.5"/><ellipse cx="1191.25" cy="1218.5" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1187.1719,1214.2656 L1187.1719,1212.1094 L1194.5625,1212.1094 L1194.5625,1214.2656 L1192.0938,1214.2656 L1192.0938,1222.3438 L1194.5625,1222.3438 L1194.5625,1224.5 L1187.1719,1224.5 L1187.1719,1222.3438 L1189.6406,1222.3438 L1189.6406,1214.2656 L1187.1719,1214.2656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="120" x="1211.75" y="1223.3467">IReminderService</text><line style="stroke:#181818;stroke-width:0.5;" x1="1094.5" x2="1416.5" y1="1234.5" y2="1234.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="1094.5" x2="1416.5" y1="1242.5" y2="1242.5"/><ellipse cx="1104.5" cy="1256.1484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="1113.5" y="1259.4951">CreateReminder() : Reminder</text><ellipse cx="1104.5" cy="1272.4453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="1113.5" y="1275.792">UpdateReminder() : void</text><ellipse cx="1104.5" cy="1288.7422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="1113.5" y="1292.0889">DeleteReminder() : void</text><ellipse cx="1104.5" cy="1305.0391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="1113.5" y="1308.3857">GetReminderById() : Reminder</text><ellipse cx="1104.5" cy="1321.3359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="298" x="1113.5" y="1324.6826">GetRemindersByUserId() : List&lt;Reminder&gt;</text><ellipse cx="1104.5" cy="1337.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="289" x="1113.5" y="1340.9795">GetRemindersByCarId() : List&lt;Reminder&gt;</text><ellipse cx="1104.5" cy="1353.9297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="252" x="1113.5" y="1357.2764">GetAllReminders() : List&lt;Reminder&gt;</text></g><!--MD5=[f949266982995eea42921d1d648f99e2]
+class ReminderService--><g id="elem_ReminderService"><rect codeLine="121" fill="#F1F1F1" height="162.0781" id="ReminderService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="324" x="1058.5" y="947"/><ellipse cx="1157.75" cy="963" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1160.7188,968.6406 Q1160.1406,968.9375 1159.5,969.0781 Q1158.8594,969.2344 1158.1563,969.2344 Q1155.6563,969.2344 1154.3281,967.5938 Q1153.0156,965.9375 1153.0156,962.8125 Q1153.0156,959.6875 1154.3281,958.0313 Q1155.6563,956.375 1158.1563,956.375 Q1158.8594,956.375 1159.5,956.5313 Q1160.1563,956.6875 1160.7188,956.9844 L1160.7188,959.7031 Q1160.0938,959.125 1159.5,958.8594 Q1158.9063,958.5781 1158.2813,958.5781 Q1156.9375,958.5781 1156.25,959.6563 Q1155.5625,960.7188 1155.5625,962.8125 Q1155.5625,964.9063 1156.25,965.9844 Q1156.9375,967.0469 1158.2813,967.0469 Q1158.9063,967.0469 1159.5,966.7813 Q1160.0938,966.5 1160.7188,965.9219 L1160.7188,968.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="1178.25" y="967.8467">ReminderService</text><line style="stroke:#181818;stroke-width:0.5;" x1="1059.5" x2="1381.5" y1="979" y2="979"/><line style="stroke:#181818;stroke-width:0.5;" x1="1059.5" x2="1381.5" y1="987" y2="987"/><ellipse cx="1069.5" cy="1000.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="1078.5" y="1003.9951">CreateReminder() : Reminder</text><ellipse cx="1069.5" cy="1016.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="1078.5" y="1020.292">UpdateReminder() : void</text><ellipse cx="1069.5" cy="1033.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="1078.5" y="1036.5889">DeleteReminder() : void</text><ellipse cx="1069.5" cy="1049.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="1078.5" y="1052.8857">GetReminderById() : Reminder</text><ellipse cx="1069.5" cy="1065.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="298" x="1078.5" y="1069.1826">GetRemindersByUserId() : List&lt;Reminder&gt;</text><ellipse cx="1069.5" cy="1082.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="289" x="1078.5" y="1085.4795">GetRemindersByCarId() : List&lt;Reminder&gt;</text><ellipse cx="1069.5" cy="1098.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="252" x="1078.5" y="1101.7764">GetAllReminders() : List&lt;Reminder&gt;</text></g><!--MD5=[bdedf0a77f488ed00f12f50edadf6fff]
+class IServiceStationService--><g id="elem_IServiceStationService"><rect codeLine="132" fill="#F1F1F1" height="145.7813" id="IServiceStationService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="379" x="1323" y="262"/><ellipse cx="1432.75" cy="278" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1428.6719,273.7656 L1428.6719,271.6094 L1436.0625,271.6094 L1436.0625,273.7656 L1433.5938,273.7656 L1433.5938,281.8438 L1436.0625,281.8438 L1436.0625,284 L1428.6719,284 L1428.6719,281.8438 L1431.1406,281.8438 L1431.1406,273.7656 L1428.6719,273.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="151" x="1453.25" y="282.8467">IServiceStationService</text><line style="stroke:#181818;stroke-width:0.5;" x1="1324" x2="1701" y1="294" y2="294"/><line style="stroke:#181818;stroke-width:0.5;" x1="1324" x2="1701" y1="302" y2="302"/><ellipse cx="1334" cy="315.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="246" x="1343" y="318.9951">AddServiceStation() : ServiceStation</text><ellipse cx="1334" cy="331.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="1343" y="335.292">UpdateServiceStation() : void</text><ellipse cx="1334" cy="348.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="195" x="1343" y="351.5889">DeleteServiceStation() : void</text><ellipse cx="1334" cy="364.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="273" x="1343" y="367.8857">GetServiceStationById() : ServiceStation</text><ellipse cx="1334" cy="380.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="314" x="1343" y="384.1826">GetAllServiceStations() : List&lt;ServiceStation&gt;</text><ellipse cx="1334" cy="397.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="353" x="1343" y="400.4795">GetNearestServiceStations() : List&lt;ServiceStation&gt;</text></g><!--MD5=[220993c7eabae7ddc7f7bd17b262429b]
+class ServiceStationService--><g id="elem_ServiceStationService"><rect codeLine="140" fill="#F1F1F1" height="145.7813" id="ServiceStationService" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="379" x="1183" y="15"/><ellipse cx="1294.25" cy="31" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1297.2188,36.6406 Q1296.6406,36.9375 1296,37.0781 Q1295.3594,37.2344 1294.6563,37.2344 Q1292.1563,37.2344 1290.8281,35.5938 Q1289.5156,33.9375 1289.5156,30.8125 Q1289.5156,27.6875 1290.8281,26.0313 Q1292.1563,24.375 1294.6563,24.375 Q1295.3594,24.375 1296,24.5313 Q1296.6563,24.6875 1297.2188,24.9844 L1297.2188,27.7031 Q1296.5938,27.125 1296,26.8594 Q1295.4063,26.5781 1294.7813,26.5781 Q1293.4375,26.5781 1292.75,27.6563 Q1292.0625,28.7188 1292.0625,30.8125 Q1292.0625,32.9063 1292.75,33.9844 Q1293.4375,35.0469 1294.7813,35.0469 Q1295.4063,35.0469 1296,34.7813 Q1296.5938,34.5 1297.2188,33.9219 L1297.2188,36.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="1314.75" y="35.8467">ServiceStationService</text><line style="stroke:#181818;stroke-width:0.5;" x1="1184" x2="1561" y1="47" y2="47"/><line style="stroke:#181818;stroke-width:0.5;" x1="1184" x2="1561" y1="55" y2="55"/><ellipse cx="1194" cy="68.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="246" x="1203" y="71.9951">AddServiceStation() : ServiceStation</text><ellipse cx="1194" cy="84.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="1203" y="88.292">UpdateServiceStation() : void</text><ellipse cx="1194" cy="101.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="195" x="1203" y="104.5889">DeleteServiceStation() : void</text><ellipse cx="1194" cy="117.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="273" x="1203" y="120.8857">GetServiceStationById() : ServiceStation</text><ellipse cx="1194" cy="133.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="314" x="1203" y="137.1826">GetAllServiceStations() : List&lt;ServiceStation&gt;</text><ellipse cx="1194" cy="150.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="353" x="1203" y="153.4795">GetNearestServiceStations() : List&lt;ServiceStation&gt;</text></g><!--MD5=[885a8650dba1b0d90fd50bb2b11b4248]
+class MaintenanceAddedEventArgs--><g id="elem_MaintenanceAddedEventArgs"><rect codeLine="151" fill="#F1F1F1" height="64.2969" id="MaintenanceAddedEventArgs" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="236" x="217.5" y="1251.5"/><ellipse cx="232.5" cy="1267.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M235.4688,1273.1406 Q234.8906,1273.4375 234.25,1273.5781 Q233.6094,1273.7344 232.9063,1273.7344 Q230.4063,1273.7344 229.0781,1272.0938 Q227.7656,1270.4375 227.7656,1267.3125 Q227.7656,1264.1875 229.0781,1262.5313 Q230.4063,1260.875 232.9063,1260.875 Q233.6094,1260.875 234.25,1261.0313 Q234.9063,1261.1875 235.4688,1261.4844 L235.4688,1264.2031 Q234.8438,1263.625 234.25,1263.3594 Q233.6563,1263.0781 233.0313,1263.0781 Q231.6875,1263.0781 231,1264.1563 Q230.3125,1265.2188 230.3125,1267.3125 Q230.3125,1269.4063 231,1270.4844 Q231.6875,1271.5469 233.0313,1271.5469 Q233.6563,1271.5469 234.25,1271.2813 Q234.8438,1271 235.4688,1270.4219 L235.4688,1273.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="204" x="246.5" y="1272.3467">MaintenanceAddedEventArgs</text><line style="stroke:#181818;stroke-width:0.5;" x1="218.5" x2="452.5" y1="1283.5" y2="1283.5"/><ellipse cx="228.5" cy="1297.1484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="191" x="237.5" y="1300.4951">Maintenance : Maintenance</text><line style="stroke:#181818;stroke-width:0.5;" x1="218.5" x2="452.5" y1="1307.7969" y2="1307.7969"/></g><!--MD5=[c18fa621db095653e665b339babd31ff]
+link UserService to IUserService--><g id="link_UserService_IUserService"><path codeLine="71" d="M926.42,169.22 C932.34,189.95 938.79,212.52 944.96,234.12 " fill="none" id="UserService-to-IUserService" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="951.76,232.44,950.53,253.6,938.3,236.29,951.76,232.44" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[811257d234f1a030b6e75bf2c0ef0707]
+link CarService to ICarService--><g id="link_CarService_ICarService"><path codeLine="91" d="M769.27,647.24 C770.8,665.38 772.45,684.87 774.04,703.73 " fill="none" id="CarService-to-ICarService" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="781.03,703.33,775.74,723.85,767.08,704.5,781.03,703.33" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8bb5ef3d591a6c8e21ecffd15d09122e]
+link MaintenanceService to IMaintenanceService--><g id="link_MaintenanceService_IMaintenanceService"><path codeLine="110" d="M515.38,1109.21 C539.49,1136.5 566.56,1167.14 591.16,1194.97 " fill="none" id="MaintenanceService-to-IMaintenanceService" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="596.54,1190.49,604.54,1210.11,586.05,1199.76,596.54,1190.49" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[acc7dbb856cb39baad5e07293a947de3]
+link ReminderService to IReminderService--><g id="link_ReminderService_IReminderService"><path codeLine="130" d="M1231.57,1109.21 C1234.78,1132.44 1238.32,1158.09 1241.68,1182.38 " fill="none" id="ReminderService-to-IReminderService" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="1248.64,1181.61,1244.44,1202.38,1234.77,1183.52,1248.64,1181.61" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e87c801af71b2b6fd4e53ad0c5e0e39c]
+link ServiceStationService to IServiceStationService--><g id="link_ServiceStationService_IServiceStationService"><path codeLine="148" d="M1413.75,161.18 C1428.63,187.24 1445.62,216.96 1461.26,244.33 " fill="none" id="ServiceStationService-to-IServiceStationService" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="1467.46,241.07,1471.31,261.91,1455.31,248.02,1467.46,241.07" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[506c379b934a9a84e01e6cdf01599aab]
+link User to Car--><g id="link_User_Car"><path codeLine="156" d="M661.73,391.55 C630.74,416.35 598.62,448.3 579.5,485 C540.77,559.31 534.41,656.28 535.77,723.71 " fill="none" id="User-Car" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#000000" points="582.7271,570.7415,588.6823,563.3262,583.1863,561.2421,582.7271,570.7415" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="32" x="593.5" y="570.5669">owns</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="642.9112" y="411.4197">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="527.948" y="712.8715">*</text></g><!--MD5=[7154315c899047021ee3146f10497fd8]
+link Car to Maintenance--><g id="link_Car_Maintenance"><path codeLine="157" d="M454,807.37 C353.73,814.13 192.93,841.95 112.5,947 C61.08,1014.16 62.14,1112.87 72.72,1185.85 " fill="none" id="Car-Maintenance" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#000000" points="113.9515,1031.5889,122.4413,1027.3024,118.3004,1023.1309,113.9515,1031.5889" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="53" x="126.5" y="1032.5669">serviced</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="438.1367" y="803.9984">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="63.7845" y="1174.884">*</text></g><!--MD5=[db3d45c735db5d92206c97ab66548b70]
+link User to Reminder--><g id="link_User_Reminder"><path codeLine="158" d="M809.19,391.64 C875.46,451.67 970.5,541.82 970.5,565 C970.5,565 970.5,565 970.5,1029 C970.5,1086.98 970.5,1152.43 970.5,1202.3 " fill="none" id="User-Reminder" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#000000" points="976.4758,809.9703,977.593,800.5255,971.8281,801.6727,976.4758,809.9703" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="53" x="984.5" y="809.5669">receives</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="808.7097" y="411.9213">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="963.1883" y="1191.4695">*</text></g><!--MD5=[599482826a64caedefb49ac4708dac39]
+link Car to Reminder--><g id="link_Car_Reminder"><path codeLine="159" d="M629.06,874.13 C655.61,896.29 684.16,921.71 708.5,947 C786.78,1028.33 864.93,1132.05 915.22,1202.49 " fill="none" id="Car-Reminder" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#000000" points="850.785,1031.8359,847.058,1023.086,842.6267,1026.9477,850.785,1031.8359" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="68" x="856.5" y="1032.5669">references</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="636.9284" y="876.4956">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="902.8012" y="1191.3999">*</text></g><!--MD5=[e454b6428d3e152525845c1b2c50e263]
+link UserService to User--><g id="link_UserService_User"><path codeLine="161" d="M852.09,169.22 C830.27,203.27 805.27,242.29 785.07,273.81 " fill="none" id="UserService-to-User" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="782.13,278.41,790.3532,272.9897,784.8273,274.1999,783.6171,268.6741,782.13,278.41" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="30" x="831.5" y="212.0669">uses</text></g><!--MD5=[65a547769d95ff21374fe90740fe50d9]
+link CarService to Car--><g id="link_CarService_Car"><path codeLine="162" d="M687.68,647.24 C665.81,670.69 641.85,696.39 619.77,720.06 " fill="none" id="CarService-to-Car" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="616.24,723.85,625.3056,720.001,619.6521,720.1952,619.4579,714.5417,616.24,723.85" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="30" x="660.5" y="690.0669">uses</text></g><!--MD5=[49740fefbd0516c187947be13f2f7108]
+link ReminderService to Reminder--><g id="link_ReminderService_Reminder"><path codeLine="163" d="M1141.4,1109.21 C1113.33,1137.67 1081.68,1169.76 1053.32,1198.52 " fill="none" id="ReminderService-to-Reminder" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="1049.52,1202.38,1058.6908,1198.7888,1053.034,1198.8231,1052.9998,1193.1664,1049.52,1202.38" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="30" x="1111.5" y="1152.0669">uses</text></g><!--MD5=[79322084036825e1d9d28b4b791df84d]
+link MaintenanceService to Maintenance--><g id="link_MaintenanceService_Maintenance"><path codeLine="164" d="M310.35,1109.06 C273.53,1132.6 234.21,1159.25 199.5,1186 C195.07,1189.41 190.61,1192.98 186.15,1196.63 " fill="none" id="MaintenanceService-to-Maintenance" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="182.05,1200.02,191.5364,1197.3728,185.9051,1196.836,186.442,1191.2046,182.05,1200.02" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="30" x="265.5" y="1152.0669">uses</text></g><!--MD5=[60a9bcd659bbfefaa909d613e1db1077]
+link ServiceStationService to ServiceStation--><g id="link_ServiceStationService_ServiceStation"><path codeLine="165" d="M1321.82,161.18 C1304.14,186.37 1284.05,215 1265.37,241.6 " fill="none" id="ServiceStationService-to-ServiceStation" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="1262.38,245.85,1270.8311,240.7924,1265.2578,241.7612,1264.289,236.1879,1262.38,245.85" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="30" x="1293.5" y="212.0669">uses</text></g><!--MD5=[aceb4c70c9d0957c5998325fc1906426]
+link MaintenanceService to MaintenanceAddedEventArgs--><g id="link_MaintenanceService_MaintenanceAddedEventArgs"><path codeLine="167" d="M410.01,1109.21 C390.13,1155.44 366.13,1211.26 350.84,1246.81 " fill="none" id="MaintenanceService-to-MaintenanceAddedEventArgs" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="348.84,1251.48,356.0869,1244.8105,350.8268,1246.8917,348.7457,1241.6316,348.84,1251.48" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="30" x="398.5" y="1152.0669">uses</text></g><!--MD5=[6b7a8a88309f8319d185ed8f5a7d290c]
+@startuml
+' Модели (Data)
+class User {
+  + Id : int
+  + Email : string
+  + Password : string
+  + CreatedAt : DateTime
+}
+
+class Car {
+  + Id : int
+  + UserId : int
+  + Brand : string
+  + Model : string
+  + Year : int
+  + Mileage : int
+  + CreatedAt : DateTime
+}
+
+class Maintenance {
+  + Id : int
+  + CarId : int
+  + Date : DateTime
+  + Mileage : int
+  + Category : string
+  + PartNumber : string
+  + Cost : decimal
+  + Note : string
+  + CreatedAt : DateTime
+}
+
+class Reminder {
+  + Id : int
+  + UserId : int
+  + CarId : int
+  + Type : string
+  + DueDate : DateTime
+  + Frequency : string
+  + CreatedAt : DateTime
+}
+
+class ServiceStation {
+  + Id : int
+  + Name : string
+  + Address : string
+  + Latitude : decimal
+  + Longitude : decimal
+  + Rating : decimal
+  + ContactInfo : string
+  + CreatedAt : DateTime
+}
+
+' Интерфейсы и реализации сервисов
+interface IUserService {
+  + Register() : User
+  + Login() : User
+  + AddUser() : void
+  + GetUserByEmail() : User
+  + DeleteUser() : void
+  + GetAllUsers() : List<User>
+  + UpdateUser() : void
+}
+class UserService {
+  + Register() : User
+  + Login() : User
+  + AddUser() : void
+  + GetUserByEmail() : User
+  + DeleteUser() : void
+  + GetAllUsers() : List<User>
+  + UpdateUser() : void
+}
+UserService ..|> IUserService
+
+interface ICarService {
+  + AddCar() : Car
+  + UpdateCar() : void
+  + DeleteCar() : void
+  + GetCarById() : Car
+  + GetCarsByUserId() : List<Car>
+  + GetAllCars() : List<Car>
+  + UpdateMileage() : void
+}
+class CarService {
+  + AddCar() : Car
+  + UpdateCar() : void
+  + DeleteCar() : void
+  + GetCarById() : Car
+  + GetCarsByUserId() : List<Car>
+  + GetAllCars() : List<Car>
+  + UpdateMileage() : void
+}
+CarService ..|> ICarService
+
+interface IMaintenanceService {
+  + AddMaintenance() : Maintenance
+  + UpdateMaintenance() : void
+  + DeleteMaintenance() : void
+  + GetMaintenanceById() : Maintenance
+  + GetMaintenancesByCarId() : List<Maintenance>
+  + GetAllMaintenances() : List<Maintenance>
+}
+class MaintenanceService {
+  + AddMaintenance() : Maintenance
+  + UpdateMaintenance() : void
+  + DeleteMaintenance() : void
+  + GetMaintenanceById() : Maintenance
+  + GetMaintenancesByCarId() : List<Maintenance>
+  + GetAllMaintenances() : List<Maintenance>
+  - MaintenanceAdded : EventHandler<MaintenanceAddedEventArgs>
+}
+MaintenanceService ..|> IMaintenanceService
+
+interface IReminderService {
+  + CreateReminder() : Reminder
+  + UpdateReminder() : void
+  + DeleteReminder() : void
+  + GetReminderById() : Reminder
+  + GetRemindersByUserId() : List<Reminder>
+  + GetRemindersByCarId() : List<Reminder>
+  + GetAllReminders() : List<Reminder>
+}
+class ReminderService {
+  + CreateReminder() : Reminder
+  + UpdateReminder() : void
+  + DeleteReminder() : void
+  + GetReminderById() : Reminder
+  + GetRemindersByUserId() : List<Reminder>
+  + GetRemindersByCarId() : List<Reminder>
+  + GetAllReminders() : List<Reminder>
+}
+ReminderService ..|> IReminderService
+
+interface IServiceStationService {
+  + AddServiceStation() : ServiceStation
+  + UpdateServiceStation() : void
+  + DeleteServiceStation() : void
+  + GetServiceStationById() : ServiceStation
+  + GetAllServiceStations() : List<ServiceStation>
+  + GetNearestServiceStations() : List<ServiceStation>
+}
+class ServiceStationService {
+  + AddServiceStation() : ServiceStation
+  + UpdateServiceStation() : void
+  + DeleteServiceStation() : void
+  + GetServiceStationById() : ServiceStation
+  + GetAllServiceStations() : List<ServiceStation>
+  + GetNearestServiceStations() : List<ServiceStation>
+}
+ServiceStationService ..|> IServiceStationService
+
+' Доменное событие
+class MaintenanceAddedEventArgs {
+  + Maintenance : Maintenance
+}
+
+' Ассоциации между сущностями
+User "1" - - - "*" Car : owns >
+Car "1" - - - "*" Maintenance : serviced >
+User "1" - - - "*" Reminder : receives >
+Car "1" - - - "*" Reminder : references >
+
+UserService ..> User : uses
+CarService ..> Car : uses
+ReminderService ..> Reminder : uses
+MaintenanceService ..> Maintenance : uses
+ServiceStationService ..> ServiceStation : uses
+
+MaintenanceService ..> MaintenanceAddedEventArgs : uses
+@enduml
+
+@startuml
+class User {
+  + Id : int
+  + Email : string
+  + Password : string
+  + CreatedAt : DateTime
+}
+
+class Car {
+  + Id : int
+  + UserId : int
+  + Brand : string
+  + Model : string
+  + Year : int
+  + Mileage : int
+  + CreatedAt : DateTime
+}
+
+class Maintenance {
+  + Id : int
+  + CarId : int
+  + Date : DateTime
+  + Mileage : int
+  + Category : string
+  + PartNumber : string
+  + Cost : decimal
+  + Note : string
+  + CreatedAt : DateTime
+}
+
+class Reminder {
+  + Id : int
+  + UserId : int
+  + CarId : int
+  + Type : string
+  + DueDate : DateTime
+  + Frequency : string
+  + CreatedAt : DateTime
+}
+
+class ServiceStation {
+  + Id : int
+  + Name : string
+  + Address : string
+  + Latitude : decimal
+  + Longitude : decimal
+  + Rating : decimal
+  + ContactInfo : string
+  + CreatedAt : DateTime
+}
+
+interface IUserService {
+  + Register() : User
+  + Login() : User
+  + AddUser() : void
+  + GetUserByEmail() : User
+  + DeleteUser() : void
+  + GetAllUsers() : List<User>
+  + UpdateUser() : void
+}
+class UserService {
+  + Register() : User
+  + Login() : User
+  + AddUser() : void
+  + GetUserByEmail() : User
+  + DeleteUser() : void
+  + GetAllUsers() : List<User>
+  + UpdateUser() : void
+}
+UserService ..|> IUserService
+
+interface ICarService {
+  + AddCar() : Car
+  + UpdateCar() : void
+  + DeleteCar() : void
+  + GetCarById() : Car
+  + GetCarsByUserId() : List<Car>
+  + GetAllCars() : List<Car>
+  + UpdateMileage() : void
+}
+class CarService {
+  + AddCar() : Car
+  + UpdateCar() : void
+  + DeleteCar() : void
+  + GetCarById() : Car
+  + GetCarsByUserId() : List<Car>
+  + GetAllCars() : List<Car>
+  + UpdateMileage() : void
+}
+CarService ..|> ICarService
+
+interface IMaintenanceService {
+  + AddMaintenance() : Maintenance
+  + UpdateMaintenance() : void
+  + DeleteMaintenance() : void
+  + GetMaintenanceById() : Maintenance
+  + GetMaintenancesByCarId() : List<Maintenance>
+  + GetAllMaintenances() : List<Maintenance>
+}
+class MaintenanceService {
+  + AddMaintenance() : Maintenance
+  + UpdateMaintenance() : void
+  + DeleteMaintenance() : void
+  + GetMaintenanceById() : Maintenance
+  + GetMaintenancesByCarId() : List<Maintenance>
+  + GetAllMaintenances() : List<Maintenance>
+  - MaintenanceAdded : EventHandler<MaintenanceAddedEventArgs>
+}
+MaintenanceService ..|> IMaintenanceService
+
+interface IReminderService {
+  + CreateReminder() : Reminder
+  + UpdateReminder() : void
+  + DeleteReminder() : void
+  + GetReminderById() : Reminder
+  + GetRemindersByUserId() : List<Reminder>
+  + GetRemindersByCarId() : List<Reminder>
+  + GetAllReminders() : List<Reminder>
+}
+class ReminderService {
+  + CreateReminder() : Reminder
+  + UpdateReminder() : void
+  + DeleteReminder() : void
+  + GetReminderById() : Reminder
+  + GetRemindersByUserId() : List<Reminder>
+  + GetRemindersByCarId() : List<Reminder>
+  + GetAllReminders() : List<Reminder>
+}
+ReminderService ..|> IReminderService
+
+interface IServiceStationService {
+  + AddServiceStation() : ServiceStation
+  + UpdateServiceStation() : void
+  + DeleteServiceStation() : void
+  + GetServiceStationById() : ServiceStation
+  + GetAllServiceStations() : List<ServiceStation>
+  + GetNearestServiceStations() : List<ServiceStation>
+}
+class ServiceStationService {
+  + AddServiceStation() : ServiceStation
+  + UpdateServiceStation() : void
+  + DeleteServiceStation() : void
+  + GetServiceStationById() : ServiceStation
+  + GetAllServiceStations() : List<ServiceStation>
+  + GetNearestServiceStations() : List<ServiceStation>
+}
+ServiceStationService ..|> IServiceStationService
+
+class MaintenanceAddedEventArgs {
+  + Maintenance : Maintenance
+}
+
+User "1" - - - "*" Car : owns >
+Car "1" - - - "*" Maintenance : serviced >
+User "1" - - - "*" Reminder : receives >
+Car "1" - - - "*" Reminder : references >
+
+UserService ..> User : uses
+CarService ..> Car : uses
+ReminderService ..> Reminder : uses
+MaintenanceService ..> Maintenance : uses
+ServiceStationService ..> ServiceStation : uses
+
+MaintenanceService ..> MaintenanceAddedEventArgs : uses
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
