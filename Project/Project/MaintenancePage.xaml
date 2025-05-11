@@ -41,25 +41,37 @@
     </StackLayout>
 
     <!-- Список задач обслуживания -->
-    <CollectionView x:Name="MaintenanceCollectionView" Grid.Row="1" Margin="10">
+    <CollectionView x:Name="MaintenanceCollectionView" Grid.Row="1" Margin="10"
+                    SelectionMode="Single"
+                    SelectionChanged="MaintenanceCollectionView_SelectionChanged">
       <CollectionView.ItemTemplate>
         <DataTemplate>
-          <Grid Padding="10" ColumnSpacing="10">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <!-- Иконка задачи -->
-            <!--<Image Source="{Binding Icon}" 
-                   WidthRequest="40" 
-                   HeightRequest="40" /> -->
-            <!-- Дата и описание задачи -->
-            <StackLayout Grid.Column="1" VerticalOptions="Center">
-              <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}"
-                     FontAttributes="Bold" />
-              <Label Text="{Binding Category}" />
-            </StackLayout>
-          </Grid>
+          <SwipeView>
+            <SwipeView.RightItems>
+              <SwipeItems Mode="Execute">
+                <SwipeItem Text="Удалить" 
+                           BackgroundColor="Red" 
+                           Invoked="OnMaintenanceDeleteInvoked" 
+                           CommandParameter="{Binding .}" />
+              </SwipeItems>
+            </SwipeView.RightItems>
+            <Grid Padding="10" ColumnSpacing="10">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <!-- Иконка задачи -->
+              <!-- <Image Source="{Binding Icon}" 
+                     WidthRequest="40" 
+                     HeightRequest="40" /> -->
+              <!-- Дата, описание и дополнительные данные -->
+              <StackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding Category}" />
+              </StackLayout>
+            </Grid>
+          </SwipeView>
         </DataTemplate>
       </CollectionView.ItemTemplate>
     </CollectionView>

@@ -129,6 +129,43 @@ public partial class MaintenancePage : ContentPage
         MaintenanceCollectionView.ItemsSource = maintenances;
     }
     
+    private async void MaintenanceCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection?.FirstOrDefault() is Maintenance selectedMaintenance)
+        {
+            string details = $"Дата: {selectedMaintenance.Date:dd.MM.yyyy}\n" +
+                             $"Тип работы: {selectedMaintenance.Category}\n" +
+                             $"Пробег: {selectedMaintenance.Mileage}\n" +
+                             $"Запчасть: {selectedMaintenance.PartNumber}\n" +
+                             $"Стоимость: {selectedMaintenance.Cost}\n" +
+                             $"Примечание: {selectedMaintenance.Note}";
+
+            bool delete = await DisplayAlert("Подробности", details, "Удалить", "Закрыть");
+            if (delete)
+            {
+                _maintenanceService.DeleteMaintenance(selectedMaintenance.Id);
+                SaveMaintenances(_maintenanceService.GetAllMaintenances());
+                UpdateMaintenanceListForSelectedCar();
+            }
+
+            ((CollectionView)sender).SelectedItem = null;
+        }
+    }
+    
+    private async void OnMaintenanceDeleteInvoked(object sender, EventArgs e)
+    {
+        if (sender is SwipeItem swipe && swipe.CommandParameter is Maintenance maintenance)
+        {
+            bool confirm = await DisplayAlert("Удаление", "Вы действительно хотите удалить запись?", "Да", "Нет");
+            if (confirm)
+            {
+                _maintenanceService.DeleteMaintenance(maintenance.Id);
+                SaveMaintenances(_maintenanceService.GetAllMaintenances());
+                UpdateMaintenanceListForSelectedCar();
+            }
+        }
+    }
+    
     protected override void OnAppearing()
     {
         base.OnAppearing();
