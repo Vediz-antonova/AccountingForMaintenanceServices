@@ -1,10 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project.MaintenancePage">
-    
-    <Grid>
+  <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
@@ -19,22 +16,32 @@
       <!-- Выпадающий список для выбора автомобиля -->
       <Picker x:Name="CarPicker"
               Title="Авто"
-              HorizontalOptions="Center"
-              VerticalOptions="Center" />
-      <!-- Кнопка добавления авто, отображается при открытии списка -->
-      <Button Text="Добавить авто"
-              HorizontalOptions="Center"
-              VerticalOptions="Center" 
-              Clicked="OnCarCreateClicked"/>
-      <Button Text="Удалить авто"
+              HorizontalOptions="FillAndExpand" 
+              VerticalOptions="Center"
+              SelectedIndexChanged="CarPicker_SelectedIndexChanged" />
+      <Button Text="+"
               HorizontalOptions="End"
               VerticalOptions="Center" 
+              TextColor="Aquamarine"
+              BackgroundColor="Transparent"
+              CornerRadius="25"
+              HeightRequest="55"
+              WidthRequest="55"
+              FontSize="Large"
+              Clicked="OnCarCreateClicked"/>
+      <Button Text="🗑"
+              HorizontalOptions="End"
+              VerticalOptions="Center" 
+              BackgroundColor="Transparent"
+              CornerRadius="25"
+              HeightRequest="55"
+              WidthRequest="55"
+              FontSize="Large"
               Clicked="OnCarDeleteClicked"/>
     </StackLayout>
 
     <!-- Список задач обслуживания -->
-    <CollectionView Grid.Row="1"
-                    Margin="10">
+    <CollectionView x:Name="MaintenanceCollectionView" Grid.Row="1" Margin="10">
       <CollectionView.ItemTemplate>
         <DataTemplate>
           <Grid Padding="10" ColumnSpacing="10">
@@ -43,14 +50,14 @@
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!-- Иконка задачи -->
-            <Image Source="{Binding Icon}" 
+            <!--<Image Source="{Binding Icon}" 
                    WidthRequest="40" 
-                   HeightRequest="40" />
+                   HeightRequest="40" /> -->
             <!-- Дата и описание задачи -->
             <StackLayout Grid.Column="1" VerticalOptions="Center">
               <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}"
                      FontAttributes="Bold" />
-              <Label Text="{Binding Description}" />
+              <Label Text="{Binding Category}" />
             </StackLayout>
           </Grid>
         </DataTemplate>
@@ -58,9 +65,10 @@
     </CollectionView>
 
     <!-- Нижняя панель навигации -->
-    <Grid Grid.Row="2"
-          Padding="10">
+    <Grid Grid.Row="2" Padding="10">
       <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="*" />
@@ -70,14 +78,20 @@
       <StackLayout Grid.Column="0" HorizontalOptions="Center">
         <Label Text="ТО и ремонт" FontSize="14" HorizontalOptions="Center" />
       </StackLayout>
-      <!-- Раздел "Напоминания" -->
+      <!-- Раздел "Ближайшее СТО" -->
       <StackLayout Grid.Column="1" HorizontalOptions="Center">
+        <Label Text="Ближайшее СТО" FontSize="14" HorizontalOptions="Center" />
+      </StackLayout>
+      <!-- Раздел "Напоминания" -->
+      <StackLayout Grid.Column="2" HorizontalOptions="Center">
         <Label Text="Напоминания" FontSize="14" HorizontalOptions="Center" />
       </StackLayout>
       <!-- Раздел "Отчеты" -->
-      <StackLayout Grid.Column="2" HorizontalOptions="Center">
+      <StackLayout Grid.Column="3" HorizontalOptions="Center">
         <Label Text="Отчеты" FontSize="14" HorizontalOptions="Center" />
-        <!-- Плавающая кнопка "Плюс" для добавления записи.-->
+      </StackLayout>
+      <StackLayout Grid.Column="4" HorizontalOptions="Center">
+        <!-- Плавающая кнопка "Плюс" для добавления записи -->
         <Button Text="+"
                 FontSize="26"
                 BackgroundColor="LightCoral"
@@ -86,9 +100,7 @@
                 CornerRadius="30"
                 WidthRequest="60"
                 HeightRequest="60"
-                VerticalOptions="Center"
-                TranslationY="-90" 
-                HorizontalOptions="End"/> 
+                Clicked="OnMaintenanceClicked"/> 
       </StackLayout>
     </Grid>
   </Grid>

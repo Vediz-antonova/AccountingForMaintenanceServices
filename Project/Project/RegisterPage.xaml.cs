@@ -3,9 +3,9 @@ using AccountingForMaintenanceServicesLogic.DataLayer;
 using System.Text.RegularExpressions;
 namespace Project;
 
-public partial class RegisterPage : ContentPage
+public partial class RegisterPage
 {
-    private readonly string UserFilePath = Path.Combine(FileSystem.AppDataDirectory, "user.json");
+    private readonly string _userFilePath = Path.Combine(FileSystem.AppDataDirectory, "user.json");
     private readonly JsonSerializerService _jsonSerializerService= new JsonSerializerService();
 
     public RegisterPage()
@@ -19,26 +19,26 @@ public partial class RegisterPage : ContentPage
         {
             if (string.IsNullOrWhiteSpace(EmailEntry.Text) || string.IsNullOrWhiteSpace(PasswordEntry.Text))
             {
-                DisplayAlert("Ошибка", "Все поля должны быть заполнены", "OK");
+                _ = DisplayAlert("Ошибка", "Все поля должны быть заполнены", "OK");
                 return;
             }
 
             if (!IsValidEmail(EmailEntry.Text))
             {
-                DisplayAlert("Ошибка", "Введите корректный email", "OK");
+                _ = DisplayAlert("Ошибка", "Введите корректный email", "OK");
                 return;
             }
 
             if (PasswordEntry.Text.Length < 8)
             {
-                DisplayAlert("Ошибка", "Пароль должен содержать не менее 8 символов", "OK");
+                _ = DisplayAlert("Ошибка", "Пароль должен содержать не менее 8 символов", "OK");
                 return;
             }
 
             var users = LoadUsers();
             if (users.Any(u => u.Email == EmailEntry.Text))
             {
-                DisplayAlert("Ошибка", "Пользователь с таким email уже зарегистрирован", "OK");
+                _ = DisplayAlert("Ошибка", "Пользователь с таким email уже зарегистрирован", "OK");
                 return;
             }
 
@@ -46,12 +46,12 @@ public partial class RegisterPage : ContentPage
             var newUser = new User(newUserId, EmailEntry.Text, PasswordEntry.Text);
             users.Add(newUser);
             SaveUsers(users);
-            DisplayAlert("Успех", "Регистрация прошла успешно!", "OK");
+            _ = DisplayAlert("Успех", "Регистрация прошла успешно!", "OK");
             await Navigation.PopAsync();
         }
         catch (Exception ex)
         {
-            DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
+            _ = DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
         }
     }
     
@@ -63,15 +63,15 @@ public partial class RegisterPage : ContentPage
     
     private List<User> LoadUsers()
     {
-        if (File.Exists(UserFilePath))
+        if (File.Exists(_userFilePath))
         {
             // File.Delete(UserFilePath);
-            if (!File.Exists(UserFilePath))
+            if (!File.Exists(_userFilePath))
             {
-                File.Create(UserFilePath).Dispose();
+                File.Create(_userFilePath).Dispose();
                 return new List<User>();
             }
-            var json = File.ReadAllText(UserFilePath);
+            var json = File.ReadAllText(_userFilePath);
             return _jsonSerializerService.Deserialize<List<User>>(json);
         }
         return new List<User>();
@@ -79,6 +79,6 @@ public partial class RegisterPage : ContentPage
     private void SaveUsers(List<User> users)
     {
         var json = _jsonSerializerService.Serialize(users);
-        File.WriteAllText(UserFilePath, json);
+        File.WriteAllText(_userFilePath, json);
     }
 }

@@ -4,7 +4,7 @@ namespace Project;
 
 public partial class LoginPage : ContentPage
 {
-    private readonly string UserFilePath = Path.Combine(FileSystem.AppDataDirectory, "user.json");
+    private readonly string _userFilePath = Path.Combine(FileSystem.AppDataDirectory, "user.json");
     private readonly JsonSerializerService _jsonSerializerService= new JsonSerializerService();
     
     public LoginPage()
@@ -21,25 +21,25 @@ public partial class LoginPage : ContentPage
             var user = users.FirstOrDefault();
             if (user != null)
             {
-                DisplayAlert("Успех", "Вход выполнен успешно!", "OK");
+                _ = DisplayAlert("Успех", "Вход выполнен успешно!", "OK");
                 await Navigation.PushAsync(new MaintenancePage(user.Id));
             }
             else
             {
-                DisplayAlert("Ошибка", "Неверный email или пароль", "OK");
+                _ = DisplayAlert("Ошибка", "Неверный email или пароль", "OK");
             }
         }
         catch (Exception ex)
         {
-            DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
+            _ = DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
         }
     }
 
     private List<User> LoadUsers()
     {
-        if (File.Exists(UserFilePath))
+        if (File.Exists(_userFilePath))
         {
-            var json = File.ReadAllText(UserFilePath);
+            var json = File.ReadAllText(_userFilePath);
             return _jsonSerializerService.Deserialize<List<User>>(json);
         }
         return new List<User>();

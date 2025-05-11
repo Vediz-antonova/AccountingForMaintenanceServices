@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project.CreateMaintenancePopupPage">
+    
+    <Frame VerticalOptions="Center" HorizontalOptions="Center"
+           Padding="20" CornerRadius="10" HasShadow="True">
+        <StackLayout Spacing="15">
+            <Label Text="Выполненные работы" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Entry x:Name="DateEntry" Placeholder="Введите дату (dd.MM.yyyy)"/>
+            <Entry x:Name="MileageEntry" Placeholder="Пробег авто на момент выполненных работ"  Keyboard="Numeric"/>
+            <Entry x:Name="PartNumberEntry" Placeholder="Номер артикула"/>
+            <Entry x:Name="CostEntry" Placeholder="Стоимость запчасти" Keyboard="Numeric"/>
+            <Entry x:Name="NoteEntry" Placeholder="Заметки"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Spacing="10">
+                <Button Text="Отмена" Clicked="OnCancelClicked"/>
+                <Button Text="Создать" Clicked="OnCreateClicked"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</ContentPage>

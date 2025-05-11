@@ -32,6 +32,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Project.CreateCarPopupPage
 build_metadata.AdditionalFiles.TargetPath = CreateCarPopupPage.xaml
 build_metadata.AdditionalFiles.RelativePath = CreateCarPopupPage.xaml
 
+[C:/AccountingForMaintenanceServices/Project/Project/CreateMaintenancePopupPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Project.CreateMaintenancePopupPage.xaml
+build_metadata.AdditionalFiles.TargetPath = CreateMaintenancePopupPage.xaml
+build_metadata.AdditionalFiles.RelativePath = CreateMaintenancePopupPage.xaml
+
 [C:/AccountingForMaintenanceServices/Project/Project/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Project.LoginPage.xaml

@@ -7,7 +7,7 @@ public partial class CreateCarPopupPage : ContentPage
     private readonly int _userId;
     private readonly CarService _carService;
 
-    public event EventHandler<Car> CarCreated;
+    public event EventHandler<Car>? CarCreated;
 
     public CreateCarPopupPage(int userId, CarService carService)
     {
@@ -39,8 +39,8 @@ public partial class CreateCarPopupPage : ContentPage
             return;
         }
 
-        var userCars = _carService.GetCarsByUserId(_userId).ToList();
-        int newCarId = (userCars.Any() ? userCars.Max(car => car.Id) : 0) + 1;
+        var cars = _carService.GetAllCars().ToList();
+        int newCarId = (cars.Any() ? cars.Max(car => car.Id) : 0) + 1;
 
         var newCar = new Car(newCarId, _userId, BrandEntry.Text.Trim(), ModelEntry.Text.Trim(), year, mileage);
         CarCreated?.Invoke(this, newCar);

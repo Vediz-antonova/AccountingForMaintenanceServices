@@ -5,11 +5,12 @@ namespace Project;
 
 public partial class MaintenancePage : ContentPage
 {
-    private readonly string CarFilePath = Path.Combine(FileSystem.AppDataDirectory, "car.json");
-    private readonly JsonSerializerService _jsonSerializerService= new JsonSerializerService();
+    private readonly string _carFilePath = Path.Combine(FileSystem.AppDataDirectory, "car.json");
+    private readonly string _maintenanceFilePath = Path.Combine(FileSystem.AppDataDirectory, "maintenance.json");
+    private readonly JsonSerializerService _jsonSerializerService = new JsonSerializerService();
 
     private readonly CarService _carService = new CarService();
-    private Car _selectedCar;
+    private readonly MaintenanceService _maintenanceService = new MaintenanceService();
     private readonly int _userId;
 
     public MaintenancePage(int userId)
@@ -17,14 +18,18 @@ public partial class MaintenancePage : ContentPage
         InitializeComponent();
         _userId = userId;
         var cars = LoadCars();
-        foreach(Car car in cars)
+        var maintenances = LoadMaintenances();
+        foreach (var maintenance in maintenances)
         {
-            if (car.UserId == _userId)
-                _carService.AddCar(car);
+            _maintenanceService.AddMaintenance(maintenance);
+        }
+        foreach(Car car in cars)
+        { 
+            _carService.AddCar(car);
         }
         CarPicker.ItemsSource = cars
             .Where(car => car.UserId == _userId)
-            .Select(car => $"{car.Brand}, {car.Model} {car.Year}")
+            .Select(car => $"{car.Brand}, {car.Model} {car.Year} (ID: {car.Id})")
             .ToList();
     }
 
@@ -39,7 +44,7 @@ public partial class MaintenancePage : ContentPage
                 .Select(car => $"{car.Brand}, {car.Model} {car.Year}")
                 .ToList();
             SaveCars(cars);
-            Device.BeginInvokeOnMainThread(() => DisplayAlert("Успех", "Новый автомобиль успешно создан", "OK"));
+            DisplayAlert("Успех", "Новый автомобиль успешно создан", "OK");
         };
 
         await Navigation.PushModalAsync(popupPage);
@@ -50,22 +55,13 @@ public partial class MaintenancePage : ContentPage
         var userCars = _carService.GetCarsByUserId(_userId).ToList();
 
         var carOptions = userCars
-            .Select(car => $"{car.Brand} (ID: {car.Id})")
+            .Select(car => $"{car.Brand}, {car.Model} {car.Year} (ID: {car.Id})")
             .ToArray();
 
         var action = await DisplayActionSheet("Выберите авто для удаления", "Отмена", null, carOptions);
         if (action != "Отмена")
         {
-            var startIndex = action.LastIndexOf("ID: ") + 4;
-            var endIndex = action.LastIndexOf(')');
-            if (startIndex > 3 && endIndex > startIndex)
-            {
-                var idStr = action.Substring(startIndex, endIndex - startIndex);
-                if (int.TryParse(idStr, out int carId))
-                {
-                    _carService.DeleteCar(carId);
-                }
-            }
+            _carService.DeleteCar(ExtractCarId(action));
         }
         
         var cars = _carService.GetCarsByUserId(_userId);
@@ -74,18 +70,82 @@ public partial class MaintenancePage : ContentPage
             .ToList();
         SaveCars(cars);
     }
+
+    private async void OnMaintenanceClicked(object sender, EventArgs e)
+    {
+        if (CarPicker.SelectedItem == null)
+        {
+            await DisplayAlert("Ошибка", "Выберите автомобиль", "OK");
+            return;
+        }
+
+        var carId = ExtractCarId(CarPicker.SelectedItem.ToString());
+        var category = await DisplayActionSheet("Выберите категорию работы", "Отмена", null, "Плановые", "Внеплановые");
+    
+        if (category == "Отмена" || string.IsNullOrEmpty(category))
+            return;
+
+        List<string> maintenanceTypes = category == "Плановые"
+            ? new List<string> { "Замена масла", "Техническое обслуживание", "Диагностика двигателя" }
+            : new List<string> { "Переобувка", "Замена тормозных колодок", "Ремонт подвески" };
+
+        var selectedType = await DisplayActionSheet("Выберите тип работы", "Отмена", null, maintenanceTypes.ToArray());
+    
+        if (selectedType == "Отмена" || string.IsNullOrEmpty(selectedType))
+            return;
+
+        var popupPage = new CreateMaintenancePopupPage(carId, selectedType, _maintenanceService);
+        popupPage.MaintenanceCreated += (s, newMaintenance) =>
+        {
+            _maintenanceService.AddMaintenance(newMaintenance);
+            var maintenances = _maintenanceService.GetAllMaintenances();
+            SaveMaintenances(maintenances);
+            DisplayAlert("Успех", "Работа успешно добавлена", "OK");
+            UpdateMaintenanceListForSelectedCar();
+        };
+
+        await Navigation.PushModalAsync(popupPage);
+    }
+    
+    private void CarPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        UpdateMaintenanceListForSelectedCar();
+    }
+    
+    private void UpdateMaintenanceListForSelectedCar()
+    {
+        if (CarPicker.SelectedItem == null)
+        {
+            MaintenanceCollectionView.ItemsSource = null;
+            return;
+        }
+
+        int carId = ExtractCarId(CarPicker.SelectedItem.ToString());
+        var maintenances = _maintenanceService.GetAllMaintenances()
+            .Where(m => m.CarId == carId)
+            .OrderBy(m => m.CreatedAt) 
+            .ToList();
+
+        MaintenanceCollectionView.ItemsSource = maintenances;
+    }
+    
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        UpdateMaintenanceListForSelectedCar();
+    }
     
     private List<Car> LoadCars()
     {
-        if (File.Exists(CarFilePath))
+        if (File.Exists(_carFilePath))
         {
-            // File.Delete(CarFilePath);
-            if (!File.Exists(CarFilePath))
+            // File.Delete(_carFilePath);
+            if (!File.Exists(_carFilePath))
             {
-                File.Create(CarFilePath).Dispose();
+                File.Create(_carFilePath).Dispose();
                 return new List<Car>();
             }
-            var json = File.ReadAllText(CarFilePath);
+            var json = File.ReadAllText(_carFilePath);
             return _jsonSerializerService.Deserialize<List<Car>>(json);
         }
         return new List<Car>();
@@ -93,6 +153,38 @@ public partial class MaintenancePage : ContentPage
     private void SaveCars(List<Car> cars)
     {
         var json = _jsonSerializerService.Serialize(cars);
-        File.WriteAllText(CarFilePath, json);
+        File.WriteAllText(_carFilePath, json);
+    }
+    
+    private List<Maintenance> LoadMaintenances()
+    {
+        if (File.Exists(_carFilePath))
+        {
+            // File.Delete(_maintenanceFilePath);
+            if (!File.Exists(_maintenanceFilePath))
+            {
+                File.Create(_maintenanceFilePath).Dispose();
+                return new List<Maintenance>();
+            }
+            var json = File.ReadAllText(_maintenanceFilePath);
+            return _jsonSerializerService.Deserialize<List<Maintenance>>(json);
+        }
+        return new List<Maintenance>();
+    }
+    private void SaveMaintenances(List<Maintenance> maintenances)
+    {
+        var json = _jsonSerializerService.Serialize(maintenances);
+        File.WriteAllText(_maintenanceFilePath, json);
+    }
+    
+    private int ExtractCarId(string? selectedItem)
+    {
+        var startIndex = selectedItem.LastIndexOf("ID: ", StringComparison.Ordinal) + 4;
+        var endIndex = selectedItem.LastIndexOf(')');
+        if (startIndex > 3 && endIndex > startIndex && int.TryParse(selectedItem.Substring(startIndex, endIndex - startIndex), out int id))
+        {
+            return id;
+        }
+        throw new Exception("Не удалось извлечь ID автомобиля.");
     }
 }
