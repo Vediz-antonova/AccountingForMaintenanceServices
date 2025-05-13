@@ -13,6 +13,14 @@ public partial class MaintenancePage : ContentPage
     private readonly MaintenanceService _maintenanceService = new MaintenanceService();
     private readonly int _userId;
 
+    private readonly List<string> _planList = ["Замена моторного масла", "Замена моторного фильтра", 
+        "Замена воздушного фильтра", "Замена салонного фильтра", 
+        "Замена свечей зажигания", "Замена тормозной жидкости", "Провнрка уровня и плотности охлаждающей жидкости",
+        "Проверка настройки и регулировки фар",
+        "Замена комплекта ГРМ", "Замена моторного масла", "Техническое обслуживание", "Диагностика двигателя"];
+    private readonly List<string> _otherPlanList = ["Замена дисков", "Замена тормозных колодок", 
+        "Ремонт подвески"];
+
     public MaintenancePage(int userId)
     {
         InitializeComponent();
@@ -86,8 +94,8 @@ public partial class MaintenancePage : ContentPage
             return;
 
         List<string> maintenanceTypes = category == "Плановые"
-            ? new List<string> { "Замена масла", "Техническое обслуживание", "Диагностика двигателя" }
-            : new List<string> { "Переобувка", "Замена тормозных колодок", "Ремонт подвески" };
+            ? _planList
+            : _otherPlanList;
 
         var selectedType = await DisplayActionSheet("Выберите тип работы", "Отмена", null, maintenanceTypes.ToArray());
     
@@ -164,6 +172,19 @@ public partial class MaintenancePage : ContentPage
                 UpdateMaintenanceListForSelectedCar();
             }
         }
+    }
+
+    private async void OnMapClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MapPage(_userId));
+    }
+    private async void OnNotificationsClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new NotificationsPage(_userId));
+    }
+    private async void OnReportsClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ReportsPage(_userId));
     }
     
     protected override void OnAppearing()

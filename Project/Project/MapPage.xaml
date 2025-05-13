@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project.MapPage">
+    
+    <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <!-- Заголовок -->
+    <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="10" Spacing="10">
+      <Label Text="Карта СТО"
+             FontSize="24"
+             VerticalOptions="Center" />
+    </StackLayout>
+
+    <!-- Список задач обслуживания -->
+    <CollectionView x:Name="MaintenanceCollectionView" Grid.Row="1" Margin="10"
+                    SelectionMode="Single">
+      <CollectionView.ItemTemplate>
+        <DataTemplate>
+          <SwipeView>
+            <Grid Padding="10" ColumnSpacing="10">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <StackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding Category}" />
+              </StackLayout>
+            </Grid>
+          </SwipeView>
+        </DataTemplate>
+      </CollectionView.ItemTemplate>
+    </CollectionView>
+
+    <!-- Нижняя панель навигации -->
+    <Grid Grid.Row="2" Padding="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      
+      <!-- Раздел "ТО и ремонт" -->
+      <StackLayout Grid.Column="0" HorizontalOptions="Center">
+        <Button Text="ТО и ремонт" FontSize="14" HorizontalOptions="Center" 
+                TextColor="LightGray"
+                BackgroundColor="Transparent"
+                Clicked="OnMaintenanceClicked"/>
+      </StackLayout>
+      <!-- Раздел "Напоминания" -->
+      <StackLayout Grid.Column="1" HorizontalOptions="Center">
+        <Button Text="Напоминания" FontSize="14" HorizontalOptions="Center" 
+                TextColor="LightGray"
+                BackgroundColor="Transparent"
+                Clicked="OnNotificationsClicked"/>
+      </StackLayout>
+      <!-- Раздел "Отчеты" -->
+      <StackLayout Grid.Column="2" HorizontalOptions="Center">
+        <Button Text="Отчеты" FontSize="14" HorizontalOptions="Center" 
+                TextColor="LightGray"
+                BackgroundColor="Transparent"
+                Clicked="OnReportsClicked"/>
+      </StackLayout>
+    </Grid>
+  </Grid>
+</ContentPage>

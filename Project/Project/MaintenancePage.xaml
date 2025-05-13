@@ -83,26 +83,30 @@
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
       
-      <!-- Раздел "ТО и ремонт" -->
-      <StackLayout Grid.Column="0" HorizontalOptions="Center">
-        <Label Text="ТО и ремонт" FontSize="14" HorizontalOptions="Center" />
-      </StackLayout>
       <!-- Раздел "Ближайшее СТО" -->
-      <StackLayout Grid.Column="1" HorizontalOptions="Center">
-        <Label Text="Ближайшее СТО" FontSize="14" HorizontalOptions="Center" />
+      <StackLayout Grid.Column="0" HorizontalOptions="Center">
+        <Button Text="СТО" FontSize="14" HorizontalOptions="Center"
+                TextColor="LightGray"
+                BackgroundColor="Transparent"
+                Clicked="OnMapClicked"/>
       </StackLayout>
       <!-- Раздел "Напоминания" -->
-      <StackLayout Grid.Column="2" HorizontalOptions="Center">
-        <Label Text="Напоминания" FontSize="14" HorizontalOptions="Center" />
+      <StackLayout Grid.Column="1" HorizontalOptions="Center">
+        <Button Text="Напоминания" FontSize="14" HorizontalOptions="Center"
+                TextColor="LightGray"
+                BackgroundColor="Transparent"
+                Clicked="OnNotificationsClicked"/>
       </StackLayout>
       <!-- Раздел "Отчеты" -->
-      <StackLayout Grid.Column="3" HorizontalOptions="Center">
-        <Label Text="Отчеты" FontSize="14" HorizontalOptions="Center" />
+      <StackLayout Grid.Column="2" HorizontalOptions="Center">
+        <Button Text="Отчеты" FontSize="14" HorizontalOptions="Center"
+                TextColor="LightGray"
+                BackgroundColor="Transparent"
+                Clicked="OnReportsClicked"/>
       </StackLayout>
-      <StackLayout Grid.Column="4" HorizontalOptions="Center">
+      <StackLayout Grid.Column="3" HorizontalOptions="Center">
         <!-- Плавающая кнопка "Плюс" для добавления записи -->
         <Button Text="+"
                 FontSize="26"

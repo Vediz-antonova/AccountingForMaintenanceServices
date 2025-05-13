@@ -56,11 +56,29 @@ build_metadata.AdditionalFiles.ManifestResourceName = Project.MaintenancePage.xa
 build_metadata.AdditionalFiles.TargetPath = MaintenancePage.xaml
 build_metadata.AdditionalFiles.RelativePath = MaintenancePage.xaml
 
+[C:/AccountingForMaintenanceServices/Project/Project/MapPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Project.MapPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MapPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MapPage.xaml
+
+[C:/AccountingForMaintenanceServices/Project/Project/NotificationsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Project.NotificationsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = NotificationsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = NotificationsPage.xaml
+
 [C:/AccountingForMaintenanceServices/Project/Project/RegisterPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Project.RegisterPage.xaml
 build_metadata.AdditionalFiles.TargetPath = RegisterPage.xaml
 build_metadata.AdditionalFiles.RelativePath = RegisterPage.xaml
+
+[C:/AccountingForMaintenanceServices/Project/Project/ReportsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Project.ReportsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = ReportsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = ReportsPage.xaml
 
 [C:/AccountingForMaintenanceServices/Project/Project/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
