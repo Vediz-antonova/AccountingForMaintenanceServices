@@ -93,6 +93,7 @@ fun NavGraph(
             val filters by maintenanceViewModel.filters.collectAsState()
 
             MaintenanceListScreen(
+                carId = carId,
                 carName = carName,
                 records = records,
                 filters = filters,
@@ -107,6 +108,9 @@ fun NavGraph(
                 onFiltersChange = { maintenanceViewModel.updateFilters(it) },
                 onRemindersClick = {
                     navController.navigate(Routes.reminders(carId))
+                },
+                onUpdateMileage = { id, mileage ->
+                    carsViewModel.updateCarMileage(id, mileage)
                 }
             )
         }

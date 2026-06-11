@@ -33,6 +33,12 @@ class CarRepository {
         return _cars.value.find { it.id == carId }
     }
 
+    fun updateCarMileage(carId: String, mileage: Int) {
+        _cars.update { current ->
+            current.map { if (it.id == carId) it.copy(mileage = mileage) else it }
+        }
+    }
+
     fun clearSelection() {
         _selectedCarId.value = null
     }

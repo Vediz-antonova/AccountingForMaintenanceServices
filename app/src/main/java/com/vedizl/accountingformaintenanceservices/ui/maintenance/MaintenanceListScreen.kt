@@ -15,10 +15,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.Notifications
@@ -48,6 +50,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.vedizl.accountingformaintenanceservices.data.model.MaintenanceCategories
@@ -59,6 +62,7 @@ import java.time.format.DateTimeFormatter
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MaintenanceListScreen(
+    carId: String,
     carName: String,
     records: List<MaintenanceRecord>,
     filters: MaintenanceFilters,
@@ -68,9 +72,12 @@ fun MaintenanceListScreen(
     onDeleteRecord: (String) -> Unit,
     onFiltersChange: (MaintenanceFilters) -> Unit,
     onRemindersClick: () -> Unit,
+    onUpdateMileage: (carId: String, mileage: Int) -> Unit,
 ) {
     var showDeleteDialog by remember { mutableStateOf<String?>(null) }
     var showFilters by remember { mutableStateOf(false) }
+    var showMileageDialog by remember { mutableStateOf(false) }
+    var mileageText by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -110,6 +117,15 @@ fun MaintenanceListScreen(
                                 MaterialTheme.colorScheme.primary
                             else
                                 MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    IconButton(onClick = {
+                        mileageText = ""
+                        showMileageDialog = true
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.Speed,
+                            contentDescription = "Обновить пробег"
                         )
                     }
                     IconButton(onClick = onRemindersClick) {
@@ -196,6 +212,40 @@ fun MaintenanceListScreen(
                 }
             )
         }
+    }
+
+    if (showMileageDialog) {
+        AlertDialog(
+            onDismissRequest = { showMileageDialog = false },
+            title = { Text("Обновить пробег", fontWeight = FontWeight.SemiBold) },
+            text = {
+                OutlinedTextField(
+                    value = mileageText,
+                    onValueChange = { if (it.all { c -> c.isDigit() } || it.isEmpty()) mileageText = it },
+                    label = { Text("Пробег (км)") },
+                    placeholder = { Text("например, 50000") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    if (mileageText.isNotEmpty()) {
+                        onUpdateMileage(carId, mileageText.toInt())
+                        showMileageDialog = false
+                    }
+                }) {
+                    Text("Сохранить")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showMileageDialog = false }) {
+                    Text("Отмена")
+                }
+            }
+        )
     }
 }
 

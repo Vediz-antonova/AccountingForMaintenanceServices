@@ -43,6 +43,10 @@ class CarsViewModel : ViewModel() {
         repository.deleteCar(carId)
     }
 
+    fun updateCarMileage(carId: String, mileage: Int) {
+        repository.updateCarMileage(carId, mileage)
+    }
+
     fun selectCar(carId: String) {
         repository.selectCar(carId)
     }
