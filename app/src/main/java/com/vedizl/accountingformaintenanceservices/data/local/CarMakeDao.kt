@@ -17,6 +17,12 @@ interface CarMakeDao {
     @Query("SELECT * FROM car_models ORDER BY name")
     fun getAllModels(): Flow<List<CarModelEntity>>
 
+    @Query("SELECT * FROM car_makes WHERE name = :name LIMIT 1")
+    suspend fun getMakeByName(name: String): CarMakeEntity?
+
+    @Query("SELECT * FROM car_models WHERE name = :name AND makeId = :makeId LIMIT 1")
+    suspend fun getModelByNameAndMakeId(name: String, makeId: String): CarModelEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMake(make: CarMakeEntity)
 

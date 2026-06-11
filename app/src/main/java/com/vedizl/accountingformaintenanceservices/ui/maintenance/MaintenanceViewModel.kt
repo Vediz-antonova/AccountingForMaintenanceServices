@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 data class MaintenanceFilters(
     val category: String? = null,
@@ -75,6 +76,18 @@ class MaintenanceViewModel(application: Application) : AndroidViewModel(applicat
     fun addRecord(record: MaintenanceRecord) {
         viewModelScope.launch {
             try {
+                val existingCategory = db.categoryDao().getCategoryByName(record.category)
+                val categoryId = existingCategory?.id ?: run {
+                    val newId = UUID.randomUUID().toString()
+                    db.categoryDao().insertCategory(CategoryEntity(id = newId, name = record.category))
+                    newId
+                }
+                val existingType = db.categoryDao().getWorkTypeByNameAndCategoryId(record.type, categoryId)
+                if (existingType == null) {
+                    db.categoryDao().insertWorkTypes(listOf(
+                        WorkTypeEntity(categoryId = categoryId, name = record.type, requiresParts = false)
+                    ))
+                }
                 repository.addRecord(record)
             } catch (e: Exception) {
                 _error.value = "Ошибка при сохранении: ${e.message}"

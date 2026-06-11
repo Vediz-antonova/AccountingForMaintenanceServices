@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 class CarsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -51,6 +52,16 @@ class CarsViewModel(application: Application) : AndroidViewModel(application) {
         )
         viewModelScope.launch {
             try {
+                val existingMake = db.carMakeDao().getMakeByName(brand)
+                val makeId = existingMake?.id ?: run {
+                    val newId = UUID.randomUUID().toString()
+                    db.carMakeDao().insertMake(CarMakeEntity(id = newId, name = brand))
+                    newId
+                }
+                val existingModel = db.carMakeDao().getModelByNameAndMakeId(model, makeId)
+                if (existingModel == null) {
+                    db.carMakeDao().insertModels(listOf(CarModelEntity(makeId = makeId, name = model)))
+                }
                 repository.addCar(car)
             } catch (e: Exception) {
                 _error.value = "Ошибка при сохранении: ${e.message}"

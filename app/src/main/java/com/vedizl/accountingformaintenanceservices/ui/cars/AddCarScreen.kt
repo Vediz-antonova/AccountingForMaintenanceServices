@@ -25,6 +25,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -64,7 +65,11 @@ fun AddCarScreen(
     val years = remember { (1990..2026).toList().sortedDescending() }
 
     var selectedBrand by remember { mutableStateOf<CarMakeEntity?>(null) }
+    var isCustomBrand by remember { mutableStateOf(false) }
+    var customBrandText by remember { mutableStateOf("") }
     var selectedModel by remember { mutableStateOf<String?>(null) }
+    var isCustomModel by remember { mutableStateOf(false) }
+    var customModelText by remember { mutableStateOf("") }
     var selectedYear by remember { mutableStateOf<Int?>(null) }
     var licensePlate by remember { mutableStateOf("") }
     var mileageText by remember { mutableStateOf("") }
@@ -81,10 +86,9 @@ fun AddCarScreen(
         }
     }
 
-    val isFormValid = selectedBrand != null
-            && selectedModel != null
-            && selectedYear != null
-            && !licensePlateError
+    val brandValid = if (isCustomBrand) customBrandText.isNotBlank() else selectedBrand != null
+    val modelValid = if (isCustomModel) customModelText.isNotBlank() else selectedModel != null
+    val isFormValid = brandValid && modelValid && selectedYear != null && !licensePlateError
 
     val filteredModels = remember(selectedBrand, models) {
         if (selectedBrand != null) models.filter { it.makeId == selectedBrand!!.id }
@@ -146,33 +150,63 @@ fun AddCarScreen(
                     )
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    ExposedDropdownMenuBox(
-                        expanded = brandExpanded,
-                        onExpandedChange = { brandExpanded = it }
-                    ) {
+                    if (isCustomBrand) {
                         OutlinedTextField(
-                            value = selectedBrand?.name ?: "",
-                            onValueChange = {},
-                            readOnly = true,
+                            value = customBrandText,
+                            onValueChange = { customBrandText = it },
                             label = { Text("Марка") },
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = brandExpanded)
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable),
+                            placeholder = { Text("Введите марку автомобиля") },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(12.dp)
                         )
-                        ExposedDropdownMenu(
+                        TextButton(onClick = {
+                            isCustomBrand = false
+                            customBrandText = ""
+                        }) {
+                            Text("Выбрать из списка", style = MaterialTheme.typography.bodySmall)
+                        }
+                    } else {
+                        ExposedDropdownMenuBox(
                             expanded = brandExpanded,
-                            onDismissRequest = { brandExpanded = false }
+                            onExpandedChange = { brandExpanded = it }
                         ) {
-                            makes.forEach { make ->
+                            OutlinedTextField(
+                                value = selectedBrand?.name ?: "",
+                                onValueChange = {},
+                                readOnly = true,
+                                label = { Text("Марка") },
+                                trailingIcon = {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = brandExpanded)
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .menuAnchor(type = MenuAnchorType.PrimaryNotEditable),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                            ExposedDropdownMenu(
+                                expanded = brandExpanded,
+                                onDismissRequest = { brandExpanded = false }
+                            ) {
+                                makes.forEach { make ->
+                                    DropdownMenuItem(
+                                        text = { Text(make.name) },
+                                        onClick = {
+                                            selectedBrand = make
+                                            selectedModel = null
+                                            isCustomModel = false
+                                            brandExpanded = false
+                                        }
+                                    )
+                                }
+                                HorizontalDivider()
                                 DropdownMenuItem(
-                                    text = { Text(make.name) },
+                                    text = { Text("— Ввести марку —") },
                                     onClick = {
-                                        selectedBrand = make
+                                        isCustomBrand = true
+                                        selectedBrand = null
                                         selectedModel = null
+                                        isCustomModel = false
                                         brandExpanded = false
                                     }
                                 )
@@ -182,33 +216,70 @@ fun AddCarScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    ExposedDropdownMenuBox(
-                        expanded = modelExpanded,
-                        onExpandedChange = { if (selectedBrand != null) modelExpanded = it }
-                    ) {
+                    if (isCustomBrand) {
                         OutlinedTextField(
-                            value = selectedModel ?: "",
-                            onValueChange = {},
-                            readOnly = true,
+                            value = customModelText,
+                            onValueChange = { customModelText = it },
                             label = { Text("Модель") },
-                            enabled = selectedBrand != null,
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = modelExpanded)
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable),
+                            placeholder = { Text("Введите модель автомобиля") },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(12.dp)
                         )
-                        ExposedDropdownMenu(
+                    } else if (isCustomModel) {
+                        OutlinedTextField(
+                            value = customModelText,
+                            onValueChange = { customModelText = it },
+                            label = { Text("Модель") },
+                            placeholder = { Text("Введите модель автомобиля") },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                        TextButton(onClick = {
+                            isCustomModel = false
+                            customModelText = ""
+                        }) {
+                            Text("Выбрать из списка", style = MaterialTheme.typography.bodySmall)
+                        }
+                    } else {
+                        ExposedDropdownMenuBox(
                             expanded = modelExpanded,
-                            onDismissRequest = { modelExpanded = false }
+                            onExpandedChange = { if (selectedBrand != null) modelExpanded = it }
                         ) {
-                            filteredModels.forEach { model ->
+                            OutlinedTextField(
+                                value = selectedModel ?: "",
+                                onValueChange = {},
+                                readOnly = true,
+                                label = { Text("Модель") },
+                                enabled = selectedBrand != null,
+                                trailingIcon = {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = modelExpanded)
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .menuAnchor(type = MenuAnchorType.PrimaryNotEditable),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                            ExposedDropdownMenu(
+                                expanded = modelExpanded,
+                                onDismissRequest = { modelExpanded = false }
+                            ) {
+                                filteredModels.forEach { model ->
+                                    DropdownMenuItem(
+                                        text = { Text(model.name) },
+                                        onClick = {
+                                            selectedModel = model.name
+                                            modelExpanded = false
+                                        }
+                                    )
+                                }
+                                HorizontalDivider()
                                 DropdownMenuItem(
-                                    text = { Text(model.name) },
+                                    text = { Text("— Ввести модель —") },
                                     onClick = {
-                                        selectedModel = model.name
+                                        isCustomModel = true
+                                        selectedModel = null
                                         modelExpanded = false
                                     }
                                 )
@@ -329,9 +400,13 @@ fun AddCarScreen(
                 Button(
                     onClick = {
                         if (isFormValid) {
+                            val resolvedBrand = if (isCustomBrand) customBrandText else selectedBrand!!.name
+                            val resolvedModel = if (isCustomModel || isCustomBrand) {
+                                if (isCustomModel) customModelText else if (isCustomBrand) customModelText else selectedModel!!
+                            } else selectedModel!!
                             onSave(
-                                selectedBrand!!.name,
-                                selectedModel!!,
+                                resolvedBrand,
+                                resolvedModel,
                                 selectedYear!!,
                                 licensePlate.ifEmpty { null },
                                 mileageText.toIntOrNull()

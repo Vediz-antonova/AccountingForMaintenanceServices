@@ -81,8 +81,5 @@ object MaintenanceCategories {
             Type("Антикоррозийная обработка", requiresParts = false),
             Type("Покраска", requiresParts = false),
         )),
-        Category("Другое", listOf(
-            Type("Другое", requiresParts = false),
-        )),
     )
 }

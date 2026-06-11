@@ -27,6 +27,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -54,7 +55,6 @@ import androidx.compose.ui.unit.dp
 import com.vedizl.accountingformaintenanceservices.data.local.CategoryEntity
 import com.vedizl.accountingformaintenanceservices.data.local.WorkTypeEntity
 import java.time.LocalDate
-
 import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,7 +77,11 @@ fun AddMaintenanceScreen(
     ) -> Unit,
 ) {
     var selectedCategory by remember { mutableStateOf<CategoryEntity?>(null) }
+    var isCustomCategory by remember { mutableStateOf(false) }
+    var customCategoryText by remember { mutableStateOf("") }
     var selectedType by remember { mutableStateOf<WorkTypeEntity?>(null) }
+    var isCustomType by remember { mutableStateOf(false) }
+    var customTypeText by remember { mutableStateOf("") }
     var selectedDateEpochDay by remember { mutableStateOf(LocalDate.now().toEpochDay()) }
     var mileageText by remember { mutableStateOf("") }
     var partManufacturer by remember { mutableStateOf("") }
@@ -89,8 +93,10 @@ fun AddMaintenanceScreen(
     var showDatePicker by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
 
+    val catValid = if (isCustomCategory) customCategoryText.isNotBlank() else selectedCategory != null
+    val typeValid = if (isCustomType) customTypeText.isNotBlank() else selectedType != null
     val requiresParts = selectedType?.requiresParts ?: false
-    val isFormValid = selectedCategory != null && selectedType != null
+    val isFormValid = catValid && typeValid
 
     LaunchedEffect(error) {
         if (error != null) {
@@ -138,32 +144,64 @@ fun AddMaintenanceScreen(
                         fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    ExposedDropdownMenuBox(
-                        expanded = categoryExpanded,
-                        onExpandedChange = { categoryExpanded = it }
-                    ) {
+                    if (isCustomCategory) {
                         OutlinedTextField(
-                            value = selectedCategory?.name ?: "",
-                            onValueChange = {},
-                            readOnly = true,
+                            value = customCategoryText,
+                            onValueChange = { customCategoryText = it },
                             label = { Text("Категория") },
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = categoryExpanded)
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable, enabled = true),
+                            placeholder = { Text("Введите категорию работы") },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(12.dp)
                         )
-                        ExposedDropdownMenu(
+                        TextButton(onClick = {
+                            isCustomCategory = false
+                            customCategoryText = ""
+                            isCustomType = false
+                            customTypeText = ""
+                        }) {
+                            Text("Выбрать из списка", style = MaterialTheme.typography.bodySmall)
+                        }
+                    } else {
+                        ExposedDropdownMenuBox(
                             expanded = categoryExpanded,
-                            onDismissRequest = { categoryExpanded = false }
+                            onExpandedChange = { categoryExpanded = it }
                         ) {
-                            categories.forEach { cat ->
+                            OutlinedTextField(
+                                value = selectedCategory?.name ?: "",
+                                onValueChange = {},
+                                readOnly = true,
+                                label = { Text("Категория") },
+                                trailingIcon = {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = categoryExpanded)
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                                    .menuAnchor(type = MenuAnchorType.PrimaryNotEditable, enabled = true),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                            ExposedDropdownMenu(
+                                expanded = categoryExpanded,
+                                onDismissRequest = { categoryExpanded = false }
+                            ) {
+                                categories.forEach { cat ->
+                                    DropdownMenuItem(
+                                        text = { Text(cat.name) },
+                                        onClick = {
+                                            selectedCategory = cat
+                                            selectedType = null
+                                            isCustomType = false
+                                            categoryExpanded = false
+                                        }
+                                    )
+                                }
+                                HorizontalDivider()
                                 DropdownMenuItem(
-                                    text = { Text(cat.name) },
+                                    text = { Text("— Ввести категорию —") },
                                     onClick = {
-                                        selectedCategory = cat
+                                        isCustomCategory = true
+                                        selectedCategory = null
                                         selectedType = null
+                                        isCustomType = false
                                         categoryExpanded = false
                                     }
                                 )
@@ -171,37 +209,74 @@ fun AddMaintenanceScreen(
                         }
                     }
 
-                    ExposedDropdownMenuBox(
-                        expanded = typeExpanded,
-                        onExpandedChange = {
-                            if (selectedCategory != null) typeExpanded = it
-                        }
-                    ) {
+                    if (isCustomCategory) {
                         OutlinedTextField(
-                            value = selectedType?.name ?: "",
-                            onValueChange = {},
-                            readOnly = true,
+                            value = customTypeText,
+                            onValueChange = { customTypeText = it },
                             label = { Text("Вид работы") },
-                            enabled = selectedCategory != null,
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = typeExpanded)
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable, enabled = true),
+                            placeholder = { Text("Введите вид работы") },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(12.dp)
                         )
-                        ExposedDropdownMenu(
+                    } else if (isCustomType) {
+                        OutlinedTextField(
+                            value = customTypeText,
+                            onValueChange = { customTypeText = it },
+                            label = { Text("Вид работы") },
+                            placeholder = { Text("Введите вид работы") },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                        TextButton(onClick = {
+                            isCustomType = false
+                            customTypeText = ""
+                        }) {
+                            Text("Выбрать из списка", style = MaterialTheme.typography.bodySmall)
+                        }
+                    } else {
+                        ExposedDropdownMenuBox(
                             expanded = typeExpanded,
-                            onDismissRequest = { typeExpanded = false }
+                            onExpandedChange = {
+                                if (selectedCategory != null) typeExpanded = it
+                            }
                         ) {
-                            val filteredTypes = selectedCategory?.let { cat ->
-                                workTypes.filter { it.categoryId == cat.id }
-                            } ?: emptyList()
-                            filteredTypes.forEach { t ->
+                            OutlinedTextField(
+                                value = selectedType?.name ?: "",
+                                onValueChange = {},
+                                readOnly = true,
+                                label = { Text("Вид работы") },
+                                enabled = selectedCategory != null,
+                                trailingIcon = {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = typeExpanded)
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                                    .menuAnchor(type = MenuAnchorType.PrimaryNotEditable, enabled = true),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                            ExposedDropdownMenu(
+                                expanded = typeExpanded,
+                                onDismissRequest = { typeExpanded = false }
+                            ) {
+                                val filteredTypes = selectedCategory?.let { cat ->
+                                    workTypes.filter { it.categoryId == cat.id }
+                                } ?: emptyList()
+                                filteredTypes.forEach { t ->
+                                    DropdownMenuItem(
+                                        text = { Text(t.name) },
+                                        onClick = {
+                                            selectedType = t
+                                            typeExpanded = false
+                                        }
+                                    )
+                                }
+                                HorizontalDivider()
                                 DropdownMenuItem(
-                                    text = { Text(t.name) },
+                                    text = { Text("— Ввести вид работы —") },
                                     onClick = {
-                                        selectedType = t
+                                        isCustomType = true
+                                        selectedType = null
                                         typeExpanded = false
                                     }
                                 )
@@ -356,9 +431,13 @@ fun AddMaintenanceScreen(
                 Button(
                     onClick = {
                         if (isFormValid) {
+                            val resolvedCategory = if (isCustomCategory) customCategoryText else selectedCategory!!.name
+                            val resolvedType = if (isCustomType || isCustomCategory) {
+                                if (isCustomType) customTypeText else if (isCustomCategory) customTypeText else selectedType!!.name
+                            } else selectedType!!.name
                             onSave(
-                                selectedCategory!!.name,
-                                selectedType!!.name,
+                                resolvedCategory,
+                                resolvedType,
                                 selectedDateEpochDay,
                                 mileageText.toIntOrNull(),
                                 partNumber.ifEmpty { null },

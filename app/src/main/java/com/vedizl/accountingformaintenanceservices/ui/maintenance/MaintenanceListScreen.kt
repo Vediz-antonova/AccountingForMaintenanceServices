@@ -27,6 +27,8 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -44,6 +46,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -277,6 +280,8 @@ private fun FilterSection(
 ) {
     var categoryExpanded by remember { mutableStateOf(false) }
     var typeExpanded by remember { mutableStateOf(false) }
+    var showDateFromPicker by remember { mutableStateOf(false) }
+    var showDateToPicker by remember { mutableStateOf(false) }
 
     val selectedCategory = filters.category
     val selectedType = filters.type
@@ -288,6 +293,8 @@ private fun FilterSection(
     } else {
         workTypes.map { it.name }.distinct()
     }
+
+    val hasActiveFilters = selectedCategory != null || selectedType != null || filters.dateFrom != null || filters.dateTo != null
 
     Column(
         modifier = Modifier
@@ -389,12 +396,117 @@ private fun FilterSection(
             }
         }
 
-        if (selectedCategory != null || selectedType != null) {
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedTextField(
+                value = if (filters.dateFrom != null) formatFilterDate(filters.dateFrom) else "—",
+                onValueChange = {},
+                readOnly = true,
+                label = { Text("От") },
+                trailingIcon = {
+                    TextButton(onClick = {
+                        if (filters.dateFrom != null) {
+                            onFiltersChange(filters.copy(dateFrom = null))
+                        } else {
+                            showDateFromPicker = true
+                        }
+                    }) {
+                        Text(if (filters.dateFrom != null) "✕" else "Выбрать")
+                    }
+                },
+                modifier = Modifier.weight(1f),
+                shape = RoundedCornerShape(12.dp)
+            )
+            OutlinedTextField(
+                value = if (filters.dateTo != null) formatFilterDate(filters.dateTo) else "—",
+                onValueChange = {},
+                readOnly = true,
+                label = { Text("До") },
+                trailingIcon = {
+                    TextButton(onClick = {
+                        if (filters.dateTo != null) {
+                            onFiltersChange(filters.copy(dateTo = null))
+                        } else {
+                            showDateToPicker = true
+                        }
+                    }) {
+                        Text(if (filters.dateTo != null) "✕" else "Выбрать")
+                    }
+                },
+                modifier = Modifier.weight(1f),
+                shape = RoundedCornerShape(12.dp)
+            )
+        }
+
+        if (hasActiveFilters) {
             Spacer(modifier = Modifier.height(8.dp))
             TextButton(onClick = { onFiltersChange(MaintenanceFilters()) }) {
                 Text("Сбросить фильтры", color = MaterialTheme.colorScheme.primary)
             }
         }
+    }
+
+    if (showDateFromPicker) {
+        val datePickerState = rememberDatePickerState(
+            initialSelectedDateMillis = filters.dateFrom?.times(86400000L)
+        )
+        DatePickerDialog(
+            onDismissRequest = { showDateFromPicker = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    datePickerState.selectedDateMillis?.let { millis ->
+                        onFiltersChange(filters.copy(dateFrom = millis / 86400000L))
+                    }
+                    showDateFromPicker = false
+                }) { Text("Выбрать") }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    if (filters.dateFrom != null) {
+                        onFiltersChange(filters.copy(dateFrom = null))
+                    }
+                    showDateFromPicker = false
+                }) { Text("Отмена") }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+
+    if (showDateToPicker) {
+        val datePickerState = rememberDatePickerState(
+            initialSelectedDateMillis = filters.dateTo?.times(86400000L)
+        )
+        DatePickerDialog(
+            onDismissRequest = { showDateToPicker = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    datePickerState.selectedDateMillis?.let { millis ->
+                        onFiltersChange(filters.copy(dateTo = millis / 86400000L))
+                    }
+                    showDateToPicker = false
+                }) { Text("Выбрать") }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    if (filters.dateTo != null) {
+                        onFiltersChange(filters.copy(dateTo = null))
+                    }
+                    showDateToPicker = false
+                }) { Text("Отмена") }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+}
+
+private fun formatFilterDate(epochDay: Long): String {
+    return try {
+        LocalDate.ofEpochDay(epochDay).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+    } catch (e: Exception) {
+        "—"
     }
 }
 
