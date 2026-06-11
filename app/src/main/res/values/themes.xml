@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.AccountingForMaintenanceServices" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#FF7C3AED</item>
+        <item name="android:navigationBarColor">#FFFCFAFF</item>
+        <item name="android:windowBackground">#FFFCFAFF</item>
+    </style>
+</resources>
