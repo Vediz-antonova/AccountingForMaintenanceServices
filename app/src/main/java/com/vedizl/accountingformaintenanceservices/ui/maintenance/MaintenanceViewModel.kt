@@ -1,14 +1,22 @@
 package com.vedizl.accountingformaintenanceservices.ui.maintenance
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.vedizl.accountingformaintenanceservices.data.local.AppDatabase
+import com.vedizl.accountingformaintenanceservices.data.local.CategoryEntity
+import com.vedizl.accountingformaintenanceservices.data.local.WorkTypeEntity
 import com.vedizl.accountingformaintenanceservices.data.model.MaintenanceRecord
 import com.vedizl.accountingformaintenanceservices.data.repository.MaintenanceRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 data class MaintenanceFilters(
     val category: String? = null,
@@ -17,42 +25,74 @@ data class MaintenanceFilters(
     val dateTo: Long? = null,
 )
 
-class MaintenanceViewModel : ViewModel() {
+class MaintenanceViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = MaintenanceRepository()
+    private val db = AppDatabase.getInstance(application)
+    private val repository = MaintenanceRepository(db.maintenanceRecordDao())
 
     private val _filters = MutableStateFlow(MaintenanceFilters())
     val filters: StateFlow<MaintenanceFilters> = _filters
 
-    private var currentCarId: String = ""
+    private val _currentCarId = MutableStateFlow("")
 
-    val records: StateFlow<List<MaintenanceRecord>> = combine(
-        repository.records,
-        _filters
-    ) { allRecords, filters ->
-        allRecords
-            .filter { it.carId == currentCarId }
-            .filter { filters.category == null || it.category == filters.category }
-            .filter { filters.type == null || it.type == filters.type }
-            .filter { filters.dateFrom == null || it.dateEpochDay >= filters.dateFrom }
-            .filter { filters.dateTo == null || it.dateEpochDay <= filters.dateTo }
-            .sortedByDescending { it.dateEpochDay }
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+    val categories: StateFlow<List<CategoryEntity>> = db.categoryDao().getAllCategories()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val workTypes: StateFlow<List<WorkTypeEntity>> = db.categoryDao().getAllWorkTypes()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error
+
+    fun clearError() {
+        _error.value = null
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val records: StateFlow<List<MaintenanceRecord>> = _currentCarId
+        .flatMapLatest { carId ->
+            if (carId.isEmpty()) {
+                flowOf(emptyList())
+            } else {
+                repository.getRecordsForCar(carId)
+            }
+        }
+        .combine(_filters) { allRecords, filters ->
+            allRecords
+                .filter { filters.category == null || it.category == filters.category }
+                .filter { filters.type == null || it.type == filters.type }
+                .filter { filters.dateFrom == null || it.dateEpochDay >= filters.dateFrom }
+                .filter { filters.dateTo == null || it.dateEpochDay <= filters.dateTo }
+                .sortedByDescending { it.dateEpochDay }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     fun loadForCar(carId: String) {
-        currentCarId = carId
-        updateFilters(MaintenanceFilters())
+        _currentCarId.value = carId
+        _filters.value = MaintenanceFilters()
     }
 
     fun addRecord(record: MaintenanceRecord) {
-        repository.addRecord(record)
+        viewModelScope.launch {
+            try {
+                repository.addRecord(record)
+            } catch (e: Exception) {
+                _error.value = "Ошибка при сохранении: ${e.message}"
+            }
+        }
     }
 
     fun deleteRecord(recordId: String) {
-        repository.deleteRecord(recordId)
+        viewModelScope.launch {
+            try {
+                repository.deleteRecord(recordId)
+            } catch (e: Exception) {
+                _error.value = "Ошибка при удалении: ${e.message}"
+            }
+        }
     }
 
-    fun getRecordById(recordId: String): MaintenanceRecord? {
+    suspend fun getRecordById(recordId: String): MaintenanceRecord? {
         return repository.getRecordById(recordId)
     }
 

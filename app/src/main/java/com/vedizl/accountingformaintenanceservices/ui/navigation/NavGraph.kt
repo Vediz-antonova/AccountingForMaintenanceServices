@@ -1,9 +1,22 @@
 package com.vedizl.accountingformaintenanceservices.ui.navigation
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -18,7 +31,6 @@ import com.vedizl.accountingformaintenanceservices.ui.maintenance.MaintenanceDet
 import com.vedizl.accountingformaintenanceservices.ui.maintenance.MaintenanceListScreen
 import com.vedizl.accountingformaintenanceservices.ui.maintenance.MaintenanceViewModel
 import com.vedizl.accountingformaintenanceservices.ui.reminders.RemindersScreen
-import java.time.LocalDate
 
 object Routes {
     const val CARS = "cars"
@@ -40,7 +52,13 @@ fun NavGraph(
     carsViewModel: CarsViewModel,
 ) {
     val cars by carsViewModel.cars.collectAsState()
+    val carMakes by carsViewModel.carMakes.collectAsState()
+    val carModels by carsViewModel.carModels.collectAsState()
+    val carError by carsViewModel.error.collectAsState()
     val maintenanceViewModel: MaintenanceViewModel = viewModel()
+    val maintenanceCategories by maintenanceViewModel.categories.collectAsState()
+    val maintenanceWorkTypes by maintenanceViewModel.workTypes.collectAsState()
+    val maintenanceError by maintenanceViewModel.error.collectAsState()
 
     NavHost(
         navController = navController,
@@ -49,11 +67,11 @@ fun NavGraph(
         composable(Routes.CARS) {
             CarsScreen(
                 cars = cars,
+                error = carError,
                 onAddCar = {
                     navController.navigate(Routes.ADD_CAR)
                 },
                 onSelectCar = { carId ->
-                    carsViewModel.selectCar(carId)
                     val car = cars.find { it.id == carId }
                     car?.let {
                         navController.navigate(Routes.history(carId, it.displayName()))
@@ -61,12 +79,20 @@ fun NavGraph(
                 },
                 onDeleteCar = { carId ->
                     carsViewModel.deleteCar(carId)
-                }
+                },
+                onUpdateLicensePlate = { carId, licensePlate ->
+                    carsViewModel.updateCarLicensePlate(carId, licensePlate)
+                },
+                onErrorConsumed = { carsViewModel.clearError() }
             )
         }
 
         composable(Routes.ADD_CAR) {
             AddCarScreen(
+                makes = carMakes,
+                models = carModels,
+                error = carError,
+                onErrorConsumed = { carsViewModel.clearError() },
                 onBack = { navController.popBackStack() },
                 onSave = { brand, model, year, licensePlate, mileage ->
                     carsViewModel.addCar(brand, model, year, licensePlate, mileage)
@@ -97,6 +123,9 @@ fun NavGraph(
                 carName = carName,
                 records = records,
                 filters = filters,
+                categories = maintenanceCategories,
+                workTypes = maintenanceWorkTypes,
+                error = maintenanceError,
                 onBack = { navController.popBackStack() },
                 onAdd = { navController.navigate(Routes.addMaintenance(carId)) },
                 onRecordClick = { recordId ->
@@ -111,7 +140,8 @@ fun NavGraph(
                 },
                 onUpdateMileage = { id, mileage ->
                     carsViewModel.updateCarMileage(id, mileage)
-                }
+                },
+                onErrorConsumed = { maintenanceViewModel.clearError() }
             )
         }
 
@@ -122,8 +152,12 @@ fun NavGraph(
             val carId = backStackEntry.arguments?.getString("carId") ?: return@composable
 
             AddMaintenanceScreen(
+                categories = maintenanceCategories,
+                workTypes = maintenanceWorkTypes,
+                error = maintenanceError,
+                onErrorConsumed = { maintenanceViewModel.clearError() },
                 onBack = { navController.popBackStack() },
-                onSave = { category, type, dateEpochDay, mileage, partNumber, partCost, notes ->
+                onSave = { category, type, dateEpochDay, mileage, partNumber, partManufacturer, partCost, notes ->
                     val record = com.vedizl.accountingformaintenanceservices.data.model.MaintenanceRecord(
                         carId = carId,
                         category = category,
@@ -131,10 +165,14 @@ fun NavGraph(
                         dateEpochDay = dateEpochDay,
                         mileage = mileage,
                         partNumber = partNumber,
+                        partManufacturer = partManufacturer,
                         partCost = partCost,
                         notes = notes,
                     )
                     maintenanceViewModel.addRecord(record)
+                    if (mileage != null) {
+                        carsViewModel.updateCarMileage(carId, mileage)
+                    }
                     navController.popBackStack()
                 }
             )
@@ -148,22 +186,36 @@ fun NavGraph(
             )
         ) { backStackEntry ->
             val recordId = backStackEntry.arguments?.getString("recordId") ?: return@composable
-            val carId = backStackEntry.arguments?.getString("carId") ?: return@composable
 
-            LaunchedEffect(carId) {
-                maintenanceViewModel.loadForCar(carId)
+            var record by remember { mutableStateOf<com.vedizl.accountingformaintenanceservices.data.model.MaintenanceRecord?>(null) }
+            LaunchedEffect(recordId) {
+                record = maintenanceViewModel.getRecordById(recordId)
             }
 
-            val record = maintenanceViewModel.getRecordById(recordId)
             if (record != null) {
                 MaintenanceDetailScreen(
-                    record = record,
+                    record = record!!,
                     onBack = { navController.popBackStack() },
                     onDelete = { id ->
                         maintenanceViewModel.deleteRecord(id)
                         navController.popBackStack()
                     }
                 )
+            } else {
+                Column(
+                    modifier = Modifier.fillMaxSize().padding(32.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Запись не найдена",
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    TextButton(onClick = { navController.popBackStack() }) {
+                        Text("Назад")
+                    }
+                }
             }
         }
 

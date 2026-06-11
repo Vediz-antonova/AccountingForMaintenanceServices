@@ -1,29 +1,24 @@
 package com.vedizl.accountingformaintenanceservices.data.repository
 
+import com.vedizl.accountingformaintenanceservices.data.local.MaintenanceRecordDao
 import com.vedizl.accountingformaintenanceservices.data.model.MaintenanceRecord
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.Flow
 
-class MaintenanceRepository {
+class MaintenanceRepository(private val recordDao: MaintenanceRecordDao) {
 
-    private val _records = MutableStateFlow<List<MaintenanceRecord>>(emptyList())
-    val records: StateFlow<List<MaintenanceRecord>> = _records.asStateFlow()
-
-    fun addRecord(record: MaintenanceRecord) {
-        _records.update { current -> current + record }
+    fun getRecordsForCar(carId: String): Flow<List<MaintenanceRecord>> {
+        return recordDao.getRecordsForCar(carId)
     }
 
-    fun deleteRecord(recordId: String) {
-        _records.update { current -> current.filter { it.id != recordId } }
+    suspend fun addRecord(record: MaintenanceRecord) {
+        recordDao.insertRecord(record)
     }
 
-    fun getRecordsForCar(carId: String): List<MaintenanceRecord> {
-        return _records.value.filter { it.carId == carId }
+    suspend fun deleteRecord(recordId: String) {
+        recordDao.deleteRecord(recordId)
     }
 
-    fun getRecordById(recordId: String): MaintenanceRecord? {
-        return _records.value.find { it.id == recordId }
+    suspend fun getRecordById(recordId: String): MaintenanceRecord? {
+        return recordDao.getRecordById(recordId)
     }
 }

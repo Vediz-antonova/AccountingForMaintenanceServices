@@ -1,15 +1,19 @@
 package com.vedizl.accountingformaintenanceservices.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.UUID
 
+@Entity(tableName = "maintenance_records")
 data class MaintenanceRecord(
-    val id: String = UUID.randomUUID().toString(),
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val carId: String,
     val category: String,
     val type: String,
     val dateEpochDay: Long,
-    val mileage: Int,
+    val mileage: Int? = null,
     val partNumber: String? = null,
+    val partManufacturer: String? = null,
     val partCost: Double? = null,
     val notes: String? = null,
     val partImpression: String? = null,

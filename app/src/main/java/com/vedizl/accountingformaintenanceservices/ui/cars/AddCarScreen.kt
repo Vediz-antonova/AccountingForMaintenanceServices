@@ -32,10 +32,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,19 +48,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.vedizl.accountingformaintenanceservices.data.model.CarMake
-import com.vedizl.accountingformaintenanceservices.data.model.CarMakes
+import com.vedizl.accountingformaintenanceservices.data.local.CarMakeEntity
+import com.vedizl.accountingformaintenanceservices.data.local.CarModelEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddCarScreen(
+    makes: List<CarMakeEntity>,
+    models: List<CarModelEntity>,
+    error: String?,
+    onErrorConsumed: () -> Unit,
     onBack: () -> Unit,
     onSave: (brand: String, model: String, year: Int, licensePlate: String?, mileage: Int?) -> Unit,
 ) {
-    val makes = remember { CarMakes.makes }
-    val years = remember { CarMakes.years }
+    val years = remember { (1990..2026).toList().sortedDescending() }
 
-    var selectedBrand by remember { mutableStateOf<CarMake?>(null) }
+    var selectedBrand by remember { mutableStateOf<CarMakeEntity?>(null) }
     var selectedModel by remember { mutableStateOf<String?>(null) }
     var selectedYear by remember { mutableStateOf<Int?>(null) }
     var licensePlate by remember { mutableStateOf("") }
@@ -65,13 +72,27 @@ fun AddCarScreen(
     var modelExpanded by remember { mutableStateOf(false) }
     var yearExpanded by remember { mutableStateOf(false) }
     var licensePlateError by remember { mutableStateOf(false) }
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(error) {
+        if (error != null) {
+            snackbarHostState.showSnackbar(error)
+            onErrorConsumed()
+        }
+    }
 
     val isFormValid = selectedBrand != null
             && selectedModel != null
             && selectedYear != null
             && !licensePlateError
 
+    val filteredModels = remember(selectedBrand, models) {
+        if (selectedBrand != null) models.filter { it.makeId == selectedBrand!!.id }
+        else emptyList()
+    }
+
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = {
@@ -139,7 +160,7 @@ fun AddCarScreen(
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable, enabled = true),
+                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable),
                             shape = RoundedCornerShape(12.dp)
                         )
                         ExposedDropdownMenu(
@@ -159,11 +180,11 @@ fun AddCarScreen(
                         }
                     }
 
+                    Spacer(modifier = Modifier.height(8.dp))
+
                     ExposedDropdownMenuBox(
                         expanded = modelExpanded,
-                        onExpandedChange = {
-                            if (selectedBrand != null) modelExpanded = it
-                        }
+                        onExpandedChange = { if (selectedBrand != null) modelExpanded = it }
                     ) {
                         OutlinedTextField(
                             value = selectedModel ?: "",
@@ -176,24 +197,26 @@ fun AddCarScreen(
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable, enabled = true),
+                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable),
                             shape = RoundedCornerShape(12.dp)
                         )
                         ExposedDropdownMenu(
                             expanded = modelExpanded,
                             onDismissRequest = { modelExpanded = false }
                         ) {
-                            selectedBrand?.models?.forEach { model ->
+                            filteredModels.forEach { model ->
                                 DropdownMenuItem(
-                                    text = { Text(model) },
+                                    text = { Text(model.name) },
                                     onClick = {
-                                        selectedModel = model
+                                        selectedModel = model.name
                                         modelExpanded = false
                                     }
                                 )
                             }
                         }
                     }
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     ExposedDropdownMenuBox(
                         expanded = yearExpanded,
@@ -209,14 +232,14 @@ fun AddCarScreen(
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable, enabled = true),
+                                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable),
                             shape = RoundedCornerShape(12.dp)
                         )
                         ExposedDropdownMenu(
                             expanded = yearExpanded,
                             onDismissRequest = { yearExpanded = false }
                         ) {
-                            years.reversed().forEach { year ->
+                            years.forEach { year ->
                                 DropdownMenuItem(
                                     text = { Text(year.toString()) },
                                     onClick = {
@@ -227,6 +250,7 @@ fun AddCarScreen(
                             }
                         }
                     }
+
                 }
             }
 
@@ -243,71 +267,46 @@ fun AddCarScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Дополнительная информация",
+                        text = "Пробег и госномер (необязательно)",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.secondary
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Поля можно заполнить позже",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
                     Spacer(modifier = Modifier.height(12.dp))
-
-                    OutlinedTextField(
-                        value = licensePlate,
-                        onValueChange = { value ->
-                            val filtered = value.filter { it.isDigit() || it.isLetter() }.uppercase().take(7)
-                            licensePlate = filtered
-                            if (filtered.isNotEmpty()) {
-                                val digits = filtered.takeWhile { it.isDigit() }.length
-                                val letters = filtered.drop(digits).takeWhile { it.isLetter() }.length
-                                val lastDigit = filtered.drop(digits + letters).takeWhile { it.isDigit() }.length
-                                licensePlateError = !(
-                                        digits in 1..4
-                                                && letters in 0..2
-                                                && lastDigit in 0..1
-                                                && digits + letters + lastDigit == filtered.length
-                                        )
-                            } else {
-                                licensePlateError = false
-                            }
-                        },
-                        label = { Text("Госномер") },
-                        placeholder = { Text("1234AB1") },
-                        supportingText = {
-                            Text("Формат: 4 цифры, 2 буквы, 1 цифра")
-                        },
-                        isError = licensePlateError,
-                        singleLine = true,
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii),
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    if (licensePlateError) {
-                        Text(
-                            text = "Неверный формат. Используйте формат: 1234AB1",
-                            color = MaterialTheme.colorScheme.error,
-                            style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(start = 16.dp, top = 4.dp)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
                     OutlinedTextField(
                         value = mileageText,
-                        onValueChange = { value ->
-                            if (value.all { it.isDigit() } || value.isEmpty()) {
-                                mileageText = value
+                        onValueChange = { newVal ->
+                            if (newVal.isEmpty() || newVal.all { it.isDigit() }) {
+                                mileageText = newVal
                             }
                         },
                         label = { Text("Пробег (км)") },
                         placeholder = { Text("например, 50000") },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = licensePlate,
+                        onValueChange = { newVal ->
+                            val filtered = newVal.take(7).filter { it.isLetterOrDigit() }
+                            licensePlate = filtered
+                            licensePlateError = filtered.isNotEmpty() && !filtered.matches(
+                                Regex("^[0-9]{0,4}[A-Za-zА-Яа-яЁё]{0,2}[0-9]{0,1}$")
+                            )
+                        },
+                        label = { Text("Госномер") },
+                        placeholder = { Text("например, 1234AB1") },
+                        singleLine = true,
+                        isError = licensePlateError,
+                        supportingText = if (licensePlateError) {
+                            { Text("Формат: 1234AB1") }
+                        } else null,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii),
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -327,7 +326,6 @@ fun AddCarScreen(
                 ) {
                     Text("Отмена")
                 }
-
                 Button(
                     onClick = {
                         if (isFormValid) {
@@ -347,17 +345,11 @@ fun AddCarScreen(
                         containerColor = MaterialTheme.colorScheme.primary
                     )
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Check,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(end = 8.dp)
-                            .width(18.dp)
-                    )
+                    Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.width(18.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text("Сохранить")
                 }
             }
-
             Spacer(modifier = Modifier.height(24.dp))
         }
     }

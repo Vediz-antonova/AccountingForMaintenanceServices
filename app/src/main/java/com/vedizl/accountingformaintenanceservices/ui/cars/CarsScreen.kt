@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -28,10 +29,14 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,13 +51,27 @@ import com.vedizl.accountingformaintenanceservices.data.model.Car
 @Composable
 fun CarsScreen(
     cars: List<Car>,
+    error: String?,
     onAddCar: () -> Unit,
     onSelectCar: (String) -> Unit,
     onDeleteCar: (String) -> Unit,
+    onUpdateLicensePlate: (carId: String, licensePlate: String?) -> Unit,
+    onErrorConsumed: () -> Unit,
 ) {
     var showDeleteDialog by remember { mutableStateOf<String?>(null) }
+    var showEditPlateDialog by remember { mutableStateOf<String?>(null) }
+    var editPlateText by remember { mutableStateOf("") }
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(error) {
+        if (error != null) {
+            snackbarHostState.showSnackbar(error)
+            onErrorConsumed()
+        }
+    }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onAddCar,
@@ -90,7 +109,7 @@ fun CarsScreen(
                             modifier = Modifier.padding(bottom = 4.dp)
                         )
                         Text(
-                            text = "${cars.size} ${pluralize(cars.size)}",
+                            text = "${cars.size} ${pluralizeCars(cars.size)}",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -100,7 +119,11 @@ fun CarsScreen(
                         CarCard(
                             car = car,
                             onClick = { onSelectCar(car.id) },
-                            onDelete = { showDeleteDialog = car.id }
+                            onDelete = { showDeleteDialog = car.id },
+                            onEditPlate = {
+                                editPlateText = car.licensePlate ?: ""
+                                showEditPlateDialog = car.id
+                            }
                         )
                     }
                     item {
@@ -143,6 +166,40 @@ fun CarsScreen(
             )
         }
     }
+
+    showEditPlateDialog?.let { carId ->
+        val car = cars.find { it.id == carId }
+        if (car != null) {
+            AlertDialog(
+                onDismissRequest = { showEditPlateDialog = null },
+                title = { Text("Изменить госномер", fontWeight = FontWeight.SemiBold) },
+                text = {
+                    OutlinedTextField(
+                        value = editPlateText,
+                        onValueChange = { editPlateText = it.take(10) },
+                        label = { Text("Госномер") },
+                        placeholder = { Text(car.licensePlate ?: "например, 1234AB1") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                },
+                confirmButton = {
+                    TextButton(onClick = {
+                        onUpdateLicensePlate(carId, editPlateText.ifEmpty { null })
+                        showEditPlateDialog = null
+                    }) {
+                        Text("Сохранить")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showEditPlateDialog = null }) {
+                        Text("Отмена")
+                    }
+                }
+            )
+        }
+    }
 }
 
 @Composable
@@ -150,6 +207,7 @@ private fun CarCard(
     car: Car,
     onClick: () -> Unit,
     onDelete: () -> Unit,
+    onEditPlate: () -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -218,6 +276,14 @@ private fun CarCard(
                 }
             }
 
+            IconButton(onClick = onEditPlate) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Изменить госномер",
+                    tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                )
+            }
+
             IconButton(onClick = onDelete) {
                 Icon(
                     imageVector = Icons.Default.Delete,
@@ -275,7 +341,7 @@ private fun EmptyCarsState(onAddCar: () -> Unit) {
     }
 }
 
-private fun pluralize(count: Int): String {
+private fun pluralizeCars(count: Int): String {
     return when {
         count % 10 == 1 && count % 100 != 11 -> "автомобиль"
         count % 10 in 2..4 && (count % 100 < 10 || count % 100 >= 20) -> "автомобиля"

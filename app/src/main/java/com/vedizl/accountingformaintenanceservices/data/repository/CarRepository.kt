@@ -1,45 +1,26 @@
 package com.vedizl.accountingformaintenanceservices.data.repository
 
+import com.vedizl.accountingformaintenanceservices.data.local.CarDao
 import com.vedizl.accountingformaintenanceservices.data.model.Car
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.Flow
 
-class CarRepository {
+class CarRepository(private val carDao: CarDao) {
 
-    private val _cars = MutableStateFlow<List<Car>>(emptyList())
-    val cars: StateFlow<List<Car>> = _cars.asStateFlow()
+    val cars: Flow<List<Car>> = carDao.getAllCars()
 
-    private val _selectedCarId = MutableStateFlow<String?>(null)
-    val selectedCarId: StateFlow<String?> = _selectedCarId.asStateFlow()
-
-    fun addCar(car: Car) {
-        _cars.update { current -> current + car }
+    suspend fun addCar(car: Car) {
+        carDao.insertCar(car)
     }
 
-    fun deleteCar(carId: String) {
-        _cars.update { current -> current.filter { it.id != carId } }
-        if (_selectedCarId.value == carId) {
-            _selectedCarId.value = null
-        }
+    suspend fun deleteCar(carId: String) {
+        carDao.deleteCar(carId)
     }
 
-    fun selectCar(carId: String) {
-        _selectedCarId.value = carId
+    suspend fun getCarById(carId: String): Car? {
+        return carDao.getCarById(carId)
     }
 
-    fun getCarById(carId: String): Car? {
-        return _cars.value.find { it.id == carId }
-    }
-
-    fun updateCarMileage(carId: String, mileage: Int) {
-        _cars.update { current ->
-            current.map { if (it.id == carId) it.copy(mileage = mileage) else it }
-        }
-    }
-
-    fun clearSelection() {
-        _selectedCarId.value = null
+    suspend fun updateCarMileage(carId: String, mileage: Int) {
+        carDao.updateCarMileage(carId, mileage)
     }
 }

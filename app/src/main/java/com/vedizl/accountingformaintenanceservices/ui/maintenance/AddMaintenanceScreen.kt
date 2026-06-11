@@ -34,12 +34,15 @@ import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,45 +51,56 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.vedizl.accountingformaintenanceservices.data.model.MaintenanceCategories
-import com.vedizl.accountingformaintenanceservices.data.model.Type
-import java.time.Instant
+import com.vedizl.accountingformaintenanceservices.data.local.CategoryEntity
+import com.vedizl.accountingformaintenanceservices.data.local.WorkTypeEntity
 import java.time.LocalDate
-import java.time.ZoneId
+
 import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddMaintenanceScreen(
+    categories: List<CategoryEntity>,
+    workTypes: List<WorkTypeEntity>,
+    error: String?,
+    onErrorConsumed: () -> Unit,
     onBack: () -> Unit,
     onSave: (
         category: String,
         type: String,
         dateEpochDay: Long,
-        mileage: Int,
+        mileage: Int?,
         partNumber: String?,
+        partManufacturer: String?,
         partCost: Double?,
         notes: String?,
     ) -> Unit,
 ) {
-    val categories = remember { MaintenanceCategories.categories }
-    var selectedCategory by remember { mutableStateOf<com.vedizl.accountingformaintenanceservices.data.model.Category?>(null) }
-    var selectedType by remember { mutableStateOf<Type?>(null) }
+    var selectedCategory by remember { mutableStateOf<CategoryEntity?>(null) }
+    var selectedType by remember { mutableStateOf<WorkTypeEntity?>(null) }
     var selectedDateEpochDay by remember { mutableStateOf(LocalDate.now().toEpochDay()) }
     var mileageText by remember { mutableStateOf("") }
+    var partManufacturer by remember { mutableStateOf("") }
     var partNumber by remember { mutableStateOf("") }
     var partCostText by remember { mutableStateOf("") }
     var notes by remember { mutableStateOf("") }
     var categoryExpanded by remember { mutableStateOf(false) }
     var typeExpanded by remember { mutableStateOf(false) }
     var showDatePicker by remember { mutableStateOf(false) }
+    val snackbarHostState = remember { SnackbarHostState() }
 
     val requiresParts = selectedType?.requiresParts ?: false
-    val isFormValid = selectedCategory != null
-            && selectedType != null
-            && mileageText.isNotEmpty()
+    val isFormValid = selectedCategory != null && selectedType != null
+
+    LaunchedEffect(error) {
+        if (error != null) {
+            snackbarHostState.showSnackbar(error)
+            onErrorConsumed()
+        }
+    }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = { Text("Добавить запись", fontWeight = FontWeight.SemiBold) },
@@ -180,7 +194,10 @@ fun AddMaintenanceScreen(
                             expanded = typeExpanded,
                             onDismissRequest = { typeExpanded = false }
                         ) {
-                            selectedCategory?.types?.forEach { t ->
+                            val filteredTypes = selectedCategory?.let { cat ->
+                                workTypes.filter { it.categoryId == cat.id }
+                            } ?: emptyList()
+                            filteredTypes.forEach { t ->
                                 DropdownMenuItem(
                                     text = { Text(t.name) },
                                     onClick = {
@@ -228,7 +245,7 @@ fun AddMaintenanceScreen(
                         value = mileageText,
                         onValueChange = { if (it.all { c -> c.isDigit() } || it.isEmpty()) mileageText = it },
                         label = { Text("Пробег (км)") },
-                        placeholder = { Text("например, 50000") },
+                        placeholder = { Text("необязательно, например 50000") },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         modifier = Modifier.fillMaxWidth(),
@@ -253,8 +270,24 @@ fun AddMaintenanceScreen(
                         Spacer(modifier = Modifier.height(12.dp))
 
                         OutlinedTextField(
+                            value = partManufacturer,
+                            onValueChange = { partManufacturer = it },
+                            label = { Text("Производитель") },
+                            placeholder = { Text("например, Bosch, MANN, Febi") },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        OutlinedTextField(
                             value = partNumber,
-                            onValueChange = { partNumber = it },
+                            onValueChange = { newVal ->
+                                partNumber = newVal.filter { c ->
+                                    c.isLetterOrDigit() || c == '-' || c == '_' || c == '.' || c == '/' || c == ':' || c == '#' || c == '+' || c == '(' || c == ')' || c == ' '
+                                }
+                            },
                             label = { Text("Артикул детали") },
                             placeholder = { Text("например, 12345-ABCDE") },
                             singleLine = true,
@@ -267,7 +300,7 @@ fun AddMaintenanceScreen(
                         OutlinedTextField(
                             value = partCostText,
                             onValueChange = { newVal ->
-                                if (newVal.all { c -> c.isDigit() || c == '.' } || newVal.isEmpty()) {
+                                if (newVal.matches(Regex("^\\d*\\.?\\d{0,2}$")) || newVal.isEmpty()) {
                                     partCostText = newVal
                                 }
                             },
@@ -327,8 +360,9 @@ fun AddMaintenanceScreen(
                                 selectedCategory!!.name,
                                 selectedType!!.name,
                                 selectedDateEpochDay,
-                                mileageText.toInt(),
+                                mileageText.toIntOrNull(),
                                 partNumber.ifEmpty { null },
+                                partManufacturer.ifEmpty { null },
                                 partCostText.toDoubleOrNull(),
                                 notes.ifEmpty { null },
                             )

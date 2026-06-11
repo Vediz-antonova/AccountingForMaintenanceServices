@@ -26,7 +26,6 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -111,8 +110,16 @@ fun MaintenanceDetailScreen(
             DetailRow(
                 icon = Icons.Default.Speed,
                 label = "Пробег",
-                value = "${record.mileage} км"
+                value = if (record.mileage != null) "${record.mileage} км" else "—"
             )
+
+            if (record.partManufacturer != null) {
+                DetailRow(
+                    icon = Icons.Default.Numbers,
+                    label = "Производитель",
+                    value = record.partManufacturer
+                )
+            }
 
             if (record.partNumber != null) {
                 DetailRow(

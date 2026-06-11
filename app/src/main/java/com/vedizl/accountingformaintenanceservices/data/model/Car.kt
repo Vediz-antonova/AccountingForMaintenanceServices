@@ -1,9 +1,12 @@
 package com.vedizl.accountingformaintenanceservices.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.UUID
 
+@Entity(tableName = "cars")
 data class Car(
-    val id: String = UUID.randomUUID().toString(),
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val brand: String,
     val model: String,
     val year: Int,

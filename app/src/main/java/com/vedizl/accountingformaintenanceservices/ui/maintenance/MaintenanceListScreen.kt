@@ -38,11 +38,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,9 +56,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.vedizl.accountingformaintenanceservices.data.model.MaintenanceCategories
+import com.vedizl.accountingformaintenanceservices.data.local.CategoryEntity
+import com.vedizl.accountingformaintenanceservices.data.local.WorkTypeEntity
 import com.vedizl.accountingformaintenanceservices.data.model.MaintenanceRecord
-import kotlinx.coroutines.flow.StateFlow
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -66,6 +69,9 @@ fun MaintenanceListScreen(
     carName: String,
     records: List<MaintenanceRecord>,
     filters: MaintenanceFilters,
+    categories: List<CategoryEntity>,
+    workTypes: List<WorkTypeEntity>,
+    error: String?,
     onBack: () -> Unit,
     onAdd: () -> Unit,
     onRecordClick: (String) -> Unit,
@@ -73,13 +79,23 @@ fun MaintenanceListScreen(
     onFiltersChange: (MaintenanceFilters) -> Unit,
     onRemindersClick: () -> Unit,
     onUpdateMileage: (carId: String, mileage: Int) -> Unit,
+    onErrorConsumed: () -> Unit,
 ) {
     var showDeleteDialog by remember { mutableStateOf<String?>(null) }
     var showFilters by remember { mutableStateOf(false) }
     var showMileageDialog by remember { mutableStateOf(false) }
     var mileageText by remember { mutableStateOf("") }
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(error) {
+        if (error != null) {
+            snackbarHostState.showSnackbar(error)
+            onErrorConsumed()
+        }
+    }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = {
@@ -93,7 +109,7 @@ fun MaintenanceListScreen(
                         )
                         if (records.isNotEmpty()) {
                             Text(
-                                text = "${records.size} ${pluralize(records.size)}",
+                                text = "${records.size} ${pluralizeRecords(records.size)}",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -162,6 +178,8 @@ fun MaintenanceListScreen(
             if (showFilters) {
                 FilterSection(
                     filters = filters,
+                    categories = categories,
+                    workTypes = workTypes,
                     onFiltersChange = onFiltersChange
                 )
             }
@@ -253,9 +271,10 @@ fun MaintenanceListScreen(
 @Composable
 private fun FilterSection(
     filters: MaintenanceFilters,
+    categories: List<CategoryEntity>,
+    workTypes: List<WorkTypeEntity>,
     onFiltersChange: (MaintenanceFilters) -> Unit,
 ) {
-    val categories = remember { MaintenanceCategories.categories }
     var categoryExpanded by remember { mutableStateOf(false) }
     var typeExpanded by remember { mutableStateOf(false) }
 
@@ -263,9 +282,11 @@ private fun FilterSection(
     val selectedType = filters.type
 
     val availableTypes = if (selectedCategory != null) {
-        categories.find { it.name == selectedCategory }?.types?.map { it.name } ?: emptyList()
+        categories.find { it.name == selectedCategory }
+            ?.let { cat -> workTypes.filter { it.categoryId == cat.id }.map { it.name } }
+            ?: emptyList()
     } else {
-        categories.flatMap { it.types.map { t -> t.name } }.distinct()
+        workTypes.map { it.name }.distinct()
     }
 
     Column(
@@ -489,7 +510,7 @@ private fun EmptyRecordsState() {
     }
 }
 
-private fun pluralize(count: Int): String {
+private fun pluralizeRecords(count: Int): String {
     return when {
         count % 10 == 1 && count % 100 != 11 -> "запись"
         count % 10 in 2..4 && (count % 100 < 10 || count % 100 >= 20) -> "записи"
