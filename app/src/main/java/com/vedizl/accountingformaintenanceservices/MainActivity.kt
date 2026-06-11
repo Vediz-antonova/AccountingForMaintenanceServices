@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                 val viewModel: CarsViewModel = viewModel()
                 NavGraph(
                     navController = navController,
-                    viewModel = viewModel
+                    carsViewModel = viewModel
                 )
             }
         }
