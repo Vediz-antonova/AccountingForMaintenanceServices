@@ -81,6 +81,7 @@ fun MaintenanceListScreen(
     onDeleteRecord: (String) -> Unit,
     onFiltersChange: (MaintenanceFilters) -> Unit,
     onRemindersClick: () -> Unit,
+    onPartsClick: () -> Unit,
     onUpdateMileage: (carId: String, mileage: Int) -> Unit,
     onErrorConsumed: () -> Unit,
 ) {
@@ -151,6 +152,12 @@ fun MaintenanceListScreen(
                         Icon(
                             imageVector = Icons.Default.Notifications,
                             contentDescription = "Напоминания"
+                        )
+                    }
+                    IconButton(onClick = onPartsClick) {
+                        Icon(
+                            imageVector = Icons.Default.Build,
+                            contentDescription = "Артикулы"
                         )
                     }
                 },
@@ -568,16 +575,6 @@ private fun RecordCard(
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.primary
                 )
-            }
-
-            if (record.partCost != null) {
-                Text(
-                    text = "${record.partCost.toInt()} Br",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.secondary
-                )
-                Spacer(modifier = Modifier.width(8.dp))
             }
 
             IconButton(onClick = onDelete, modifier = Modifier.size(36.dp)) {

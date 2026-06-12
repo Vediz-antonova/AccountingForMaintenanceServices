@@ -30,6 +30,8 @@ import com.vedizl.accountingformaintenanceservices.ui.maintenance.AddMaintenance
 import com.vedizl.accountingformaintenanceservices.ui.maintenance.MaintenanceDetailScreen
 import com.vedizl.accountingformaintenanceservices.ui.maintenance.MaintenanceListScreen
 import com.vedizl.accountingformaintenanceservices.ui.maintenance.MaintenanceViewModel
+import com.vedizl.accountingformaintenanceservices.ui.parts.PartsScreen
+import com.vedizl.accountingformaintenanceservices.ui.parts.PartsViewModel
 import com.vedizl.accountingformaintenanceservices.ui.reminders.RemindersScreen
 
 object Routes {
@@ -39,11 +41,13 @@ object Routes {
     const val ADD_MAINTENANCE = "add_maintenance/{carId}"
     const val MAINTENANCE_DETAIL = "maintenance_detail/{recordId}/{carId}"
     const val REMINDERS = "reminders/{carId}"
+    const val PARTS = "parts/{carId}"
 
     fun history(carId: String, carName: String) = "history/$carId/$carName"
     fun addMaintenance(carId: String) = "add_maintenance/$carId"
     fun maintenanceDetail(recordId: String, carId: String) = "maintenance_detail/$recordId/$carId"
     fun reminders(carId: String) = "reminders/$carId"
+    fun parts(carId: String) = "parts/$carId"
 }
 
 @Composable
@@ -59,6 +63,7 @@ fun NavGraph(
     val maintenanceCategories by maintenanceViewModel.categories.collectAsState()
     val maintenanceWorkTypes by maintenanceViewModel.workTypes.collectAsState()
     val maintenanceError by maintenanceViewModel.error.collectAsState()
+    val partsViewModel: PartsViewModel = viewModel()
 
     NavHost(
         navController = navController,
@@ -140,6 +145,9 @@ fun NavGraph(
                 },
                 onUpdateMileage = { id, mileage ->
                     carsViewModel.updateCarMileage(id, mileage)
+                },
+                onPartsClick = {
+                    navController.navigate(Routes.parts(carId))
                 },
                 onErrorConsumed = { maintenanceViewModel.clearError() }
             )
@@ -224,6 +232,37 @@ fun NavGraph(
             arguments = listOf(navArgument("carId") { type = NavType.StringType })
         ) {
             RemindersScreen()
+        }
+
+        composable(
+            route = Routes.PARTS,
+            arguments = listOf(navArgument("carId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val carId = backStackEntry.arguments?.getString("carId") ?: return@composable
+            val car = cars.find { it.id == carId }
+
+            LaunchedEffect(carId) {
+                partsViewModel.loadForCar(carId)
+            }
+
+            val parts by partsViewModel.parts.collectAsState()
+            val partsFilters by partsViewModel.partsFilters.collectAsState()
+            val partsError by partsViewModel.error.collectAsState()
+
+            PartsScreen(
+                carName = car?.displayName() ?: "—",
+                parts = parts,
+                categories = maintenanceCategories,
+                workTypes = maintenanceWorkTypes,
+                filters = partsFilters,
+                error = partsError,
+                onBack = { navController.popBackStack() },
+                onFiltersChange = { partsViewModel.updateFilters(it) },
+                onUpdateImpression = { recordId, impression ->
+                    partsViewModel.updateImpression(recordId, impression)
+                },
+                onErrorConsumed = { partsViewModel.clearError() }
+            )
         }
     }
 }

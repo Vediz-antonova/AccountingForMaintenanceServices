@@ -21,4 +21,12 @@ class MaintenanceRepository(private val recordDao: MaintenanceRecordDao) {
     suspend fun getRecordById(recordId: String): MaintenanceRecord? {
         return recordDao.getRecordById(recordId)
     }
+
+    fun getRecordsWithParts(carId: String): Flow<List<MaintenanceRecord>> {
+        return recordDao.getRecordsWithParts(carId)
+    }
+
+    suspend fun updatePartImpression(id: String, partImpression: String?) {
+        recordDao.updatePartImpression(id, partImpression)
+    }
 }

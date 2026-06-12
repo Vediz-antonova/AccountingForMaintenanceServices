@@ -23,4 +23,10 @@ interface MaintenanceRecordDao {
 
     @Query("DELETE FROM maintenance_records WHERE carId = :carId")
     suspend fun deleteRecordsForCar(carId: String)
+
+    @Query("SELECT * FROM maintenance_records WHERE carId = :carId AND partNumber IS NOT NULL ORDER BY dateEpochDay DESC")
+    fun getRecordsWithParts(carId: String): Flow<List<MaintenanceRecord>>
+
+    @Query("UPDATE maintenance_records SET partImpression = :partImpression WHERE id = :id")
+    suspend fun updatePartImpression(id: String, partImpression: String?)
 }
